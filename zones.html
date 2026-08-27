@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>生活圈索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827e"/>
+<link rel="stylesheet" href="style.css?v=20260827f"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -21,8 +21,8 @@
   <div class="foot">生活圈 = 多个 MLS 社区聚合的本地人熟知区域 · 全大温 34 个、覆盖 338 个 MLS 社区（无重叠无遗漏）<br/>数据为原型示意 · 点击卡片进入生活圈详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827e"></script>
-<script src="shared.js?v=20260827e"></script>
+<script src="data.js?v=20260827f"></script>
+<script src="shared.js?v=20260827f"></script>
 <script>
 (function(){
   var U=window.JHU;
@@ -34,8 +34,7 @@
     return '<div class="card" onclick="JHU.open(&quot;zone&quot;,&quot;'+U.esc(zn)+'&quot;)">'+U.img(U.cityImg(z.prim),86)
       +'<div class="cb"><div class="nm">'+zn+(al&&al!==zn?' <span class="al">'+al+'</span>':'')+'</div>'
       +'<div class="tg">'+z.cities.join(' / ')+' · '+z.anchor+'</div><div class="tags">'+tags+'</div>'
-      +'<div class="stats"><span class="v">$'+s.med+'万</span><span class="g">+'+s.gain+'%</span><span class="m">'+z.nbs.length+' 个社区 · 在售 '+s.active+'</span></div>'
-      +'<div class="sub"><a href="communities.html?zone='+encodeURIComponent(zn)+'" onclick="event.stopPropagation()">查看 '+z.nbs.length+' 个社区 →</a></div></div></div>';
+      +'<div class="stats"><span class="v">$'+s.med+'万</span><span class="g">+'+s.gain+'%</span><span class="m">'+z.nbs.length+' 个社区 · 在售 '+s.active+'</span></div></div></div>';
   }
   function paint(){
     try{U.histRow(document.getElementById('hist'),'zone',!!state.q||state.city!=='全部',paint);U.hotNames(document.getElementById('hot'),'zone',!!state.q||state.city!=='全部');}catch(e){}
