@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Johome 区域找房 · 大温及周边</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="hdr"><div class="bar"><div class="logo">JOHOME</div><div class="ttl" style="font-weight:400;font-size:13px;opacity:.9">区域找房 · 大温及周边</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="wrap">
+  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索城市 / 生活圈 / 社区（回车跳转）"/></div>
+  <div id="entries"></div>
+  <div class="sec">热门城市</div>
+  <div class="grid" id="hotCities"></div>
+  <div class="sec">热门生活圈</div>
+  <div class="chips" id="hotZones" style="flex-wrap:wrap"></div>
+  <div class="cta" onclick="window.open(JHU.PROTO,'_blank')"><div style="font-size:22px">✦</div><div style="flex:1"><b>不知道从哪开始？让 AI 帮你选</b><p>买房 · 选区 · 投资，多轮问诊帮你把需求想清楚</p></div><span style="font-size:16px">›</span></div>
+  <div class="foot">城市 → 生活圈 → MLS 社区 三级索引 · 数据为原型示意（与 Buying AI 原型同源同口径）<br/>图片来自 Wikimedia Commons</div>
+</div>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var U=window.JHU;
+  var nbTot=0,zTot=0,k;for(k in JH.ZONES){zTot++;nbTot+=JH.ZONES[k].nbs.length;}
+  var cTot=Object.keys(JH.CITYCARD).length;
+  var E=[['cities.html','🏙️','城市','按行政市浏览：售出中位价、涨幅与城市定位',cTot],
+         ['zones.html','🗺️','生活圈','本地人熟知的认知型区域，多个 MLS 社区聚合、可跨市',zTot],
+         ['communities.html','🏘️','MLS 社区','最细颗粒度：按生活圈分组的全部挂盘社区',nbTot]];
+  document.getElementById('entries').innerHTML=E.map(function(e){
+    return '<div class="entry" onclick="location.href=&quot;'+e[0]+'&quot;"><div class="ei">'+e[1]+'</div><div class="et"><b>'+e[2]+'</b><p>'+e[3]+'</p></div><div class="en">'+e[4]+'</div><span class="ar">›</span></div>';
+  }).join('');
+  var HOT=['Burnaby','Richmond','Surrey','Coquitlam'];
+  document.getElementById('hotCities').innerHTML=HOT.map(function(n){
+    var a=JH.CITYCARD[n];
+    return '<div class="card" onclick="JHU.open(&quot;city&quot;,&quot;'+n+'&quot;)">'+U.img(U.cityImg(n),80)+'<div class="cb"><div class="nm">'+n+'</div><div class="stats"><span class="v">'+a[2]+'</span><span class="g">'+a[4]+'</span></div></div></div>';
+  }).join('');
+  var HZ=['Metrotown','Brentwood','Downtown','Kitsilano','Surrey Central','Coquitlam Centre','South Surrey / White Rock','Kerrisdale / Dunbar','Richmond Centre (Brighouse)','Steveston'];
+  document.getElementById('hotZones').innerHTML=HZ.filter(function(z){return JH.ZONES[z];}).map(function(z){
+    var al=(JH.ZONES[z].alias||'').split('/')[0];
+    return '<span class="chip" onclick="JHU.open(&quot;zone&quot;,&quot;'+U.esc(z)+'&quot;)">'+z+(al&&al!==z?' · '+al:'')+'</span>';
+  }).join('');
+  document.getElementById('q').onkeydown=function(e){if(e.key==='Enter'&&this.value.trim())location.href='communities.html?q='+encodeURIComponent(this.value.trim());};
+})();
+</script>
+</body>
+</html>

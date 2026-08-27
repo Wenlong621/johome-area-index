@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>生活圈索引 · Johome 区域找房</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">生活圈索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">区域找房</a> / 生活圈</div>
+  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索生活圈（如 铁道镇 / Metrotown / 学区）"/></div>
+  <div class="chips" id="cityChips"></div>
+  <div class="chips" id="sort"></div>
+  <div id="body"></div>
+  <div class="foot">生活圈 = 多个 MLS 社区聚合的本地人熟知区域 · 全大温 34 个、覆盖 338 个 MLS 社区（无重叠无遗漏）<br/>数据为原型示意 · 点击卡片进入生活圈详情页（AI 助手）</div>
+</div>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var U=window.JHU;
+  var state={q:'',city:U.param('city')||'全部',sort:'默认'};
+  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','社区数 ↓'];
+  function card(zn){
+    var z=JH.ZONES[zn],s=JH.ZSTATS[zn],al=(z.alias||'').split('/')[0];
+    var tags=(z.tags||[]).slice(0,3).map(function(t){return '<span>'+t+'</span>';}).join('');
+    return '<div class="card" onclick="JHU.open(&quot;zone&quot;,&quot;'+U.esc(zn)+'&quot;)">'+U.img(U.cityImg(z.prim),86)
+      +'<div class="cb"><div class="nm">'+zn+(al&&al!==zn?' <span class="al">'+al+'</span>':'')+'</div>'
+      +'<div class="tg">'+z.cities.join(' / ')+' · '+z.anchor+'</div><div class="tags">'+tags+'</div>'
+      +'<div class="stats"><span class="v">$'+s.med+'万</span><span class="g">+'+s.gain+'%</span><span class="m">'+z.nbs.length+' 个社区 · 在售 '+s.active+'</span></div>'
+      +'<div class="sub"><a href="communities.html?zone='+encodeURIComponent(zn)+'" onclick="event.stopPropagation()">查看 '+z.nbs.length+' 个社区 →</a></div></div></div>';
+  }
+  function paint(){
+    var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
+    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+p+'</span>';}).join('');
+    Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');paint();};});
+    var s=document.getElementById('sort');s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
+    Array.prototype.forEach.call(s.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});
+    var zs=U.zonesOfCity(state.city).filter(function(zn){var q=state.q.toLowerCase();if(!q)return true;var z=JH.ZONES[zn];return (zn+' '+(z.alias||'')+' '+z.cities.join(' ')+' '+(z.tags||[]).join(' ')+' '+z.anchor).toLowerCase().indexOf(q)>=0;});
+    if(state.sort==='价格 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].med-JH.ZSTATS[a].med;});
+    else if(state.sort==='价格 ↑')zs.sort(function(a,b){return JH.ZSTATS[a].med-JH.ZSTATS[b].med;});
+    else if(state.sort==='涨幅 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].gain-JH.ZSTATS[a].gain;});
+    else if(state.sort==='社区数 ↓')zs.sort(function(a,b){return JH.ZONES[b].nbs.length-JH.ZONES[a].nbs.length;});
+    document.getElementById('body').innerHTML=zs.length?('<div class="sec">生活圈 <span class="n">'+zs.length+' 个</span></div><div class="gridZ">'+zs.map(card).join('')+'</div>'):'<div class="empty">没有匹配的生活圈，试试中文别名（如「铁道镇」）</div>';
+  }
+  document.getElementById('q').oninput=function(){state.q=this.value.trim();paint();};
+  paint();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>城市索引 · Johome 区域找房</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">城市索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">区域找房</a> / 城市</div>
+  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索城市（如 Burnaby / 列治文）"/></div>
+  <div class="chips" id="sort"></div>
+  <div id="body"></div>
+  <div class="foot">数据为原型示意 · 与 Johome Buying AI 原型同源同口径<br/>图片来自 Wikimedia Commons · 点击卡片进入城市详情页（AI 助手）</div>
+</div>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var U=window.JHU,VAC={'Sunshine Coast':1,'Squamish':1,'Whistler':1};
+  var state={q:'',sort:'默认'};
+  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓'];
+  var CITY_ALIAS={'Richmond':'列治文','Burnaby':'本拿比','Surrey':'素里','Vancouver West':'温西','Vancouver East':'温东','West Vancouver':'西温','North Vancouver':'北温','New Westminster':'新西敏','Coquitlam':'高贵林','Port Moody':'满地宝','Langley':'兰里','Delta':'三角洲','Abbotsford':'阿伯茨福德','Mission':'米逊','Chilliwack':'奇利瓦克','Whistler':'惠斯勒','Squamish':'斯阔米什','Sunshine Coast':'阳光海岸'};
+  function zoneCnt(c){var z=0,nb=0,k;for(k in JH.ZONES){if(JH.ZONES[k].prim===c){z++;nb+=JH.ZONES[k].nbs.length;}}return [z,nb];}
+  function num(s){return parseFloat((''+s).replace(/[^0-9.]/g,''))||0;}
+  function card(name){
+    var a=JH.CITYCARD[name],cn=CITY_ALIAS[name]||'',zc=zoneCnt(name);
+    var sub=zc[0]?'<div class="sub"><a href="zones.html?city='+encodeURIComponent(name)+'" onclick="event.stopPropagation()">生活圈 '+zc[0]+'</a><a href="communities.html?city='+encodeURIComponent(name)+'" onclick="event.stopPropagation()">社区 '+zc[1]+'</a></div>':'';
+    return '<div class="card" onclick="JHU.open(&quot;city&quot;,&quot;'+U.esc(name)+'&quot;)">'+U.img(U.cityImg(name),92)
+      +'<div class="cb"><div class="nm">'+name+(cn?' <span class="al">'+cn+'</span>':'')+'</div><div class="tg">'+a[1]+'</div>'
+      +'<div class="stats"><span class="v">'+a[2]+'</span><span class="g">'+a[4]+'</span><span class="m">近一年</span></div>'+sub+'</div></div>';
+  }
+  function paint(){
+    var s=document.getElementById('sort');s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
+    Array.prototype.forEach.call(s.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});
+    var names=Object.keys(JH.CITYCARD).filter(function(n){var q=state.q.toLowerCase();return !q||(n+' '+(CITY_ALIAS[n]||'')+' '+JH.CITYCARD[n][1]).toLowerCase().indexOf(q)>=0;});
+    if(state.sort==='价格 ↓')names.sort(function(a,b){return num(JH.CITYCARD[b][2])-num(JH.CITYCARD[a][2]);});
+    else if(state.sort==='价格 ↑')names.sort(function(a,b){return num(JH.CITYCARD[a][2])-num(JH.CITYCARD[b][2]);});
+    else if(state.sort==='涨幅 ↓')names.sort(function(a,b){return num(JH.CITYCARD[b][4])-num(JH.CITYCARD[a][4]);});
+    var main=names.filter(function(n){return !VAC[n];}),vac=names.filter(function(n){return VAC[n];});
+    var h='';
+    if(main.length)h+='<div class="sec">大温城市 <span class="n">'+main.length+' 个</span></div><div class="grid">'+main.map(card).join('')+'</div>';
+    if(vac.length)h+='<div class="sec">度假胜地 <span class="n">'+vac.length+' 个</span></div><div class="grid">'+vac.map(card).join('')+'</div>';
+    document.getElementById('body').innerHTML=h||'<div class="empty">没有匹配的城市</div>';
+  }
+  document.getElementById('q').oninput=function(){state.q=this.value.trim();paint();};
+  paint();
+})();
+</script>
+</body>
+</html>

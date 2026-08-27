@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>社区索引 · Johome 区域找房</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">MLS 社区索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="wrap">
+  <div class="crumb"><a href="index.html">区域找房</a> / <a href="zones.html">生活圈</a> / 社区</div>
+  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索社区（如 Kitsilano / Metrotown）"/></div>
+  <div class="chips" id="cityChips"></div>
+  <div class="jump" id="jump"></div>
+  <div id="body"></div>
+  <div class="foot">338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）</div>
+</div>
+<script src="data.js"></script>
+<script src="shared.js"></script>
+<script>
+(function(){
+  var U=window.JHU;
+  var state={q:U.param('q'),city:U.param('city')||'全部',zone:U.param('zone')};
+  function slug(z){return 'z-'+z.replace(/[^A-Za-z0-9]+/g,'-');}
+  function row(nb){
+    return '<div class="row" onclick="JHU.open(&quot;nb&quot;,&quot;'+U.esc(nb[0])+'&quot;,&quot;'+U.esc(nb[1])+'&quot;)">'
+      +'<div class="nm">'+nb[0]+'<small>'+nb[1]+'</small></div>'
+      +'<div class="pr"><div class="v">$'+nb[2]+'万</div><div class="g">+'+nb[3]+'% 近一年</div></div>'
+      +'<div class="pr"><div class="v" style="font-weight:400;font-size:11px;color:#7A8699">'+nb[4]+' 套在售</div></div><span class="ar">›</span></div>';
+  }
+  function paint(){
+    var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
+    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+p+'</span>';}).join('');
+    Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');state.zone='';paint();};});
+    var q=state.q.toLowerCase(),zs=U.zonesOfCity(state.city),h='',jump='',shown=0;
+    if(state.zone&&JH.ZONES[state.zone])zs=[state.zone];
+    zs.forEach(function(zn){
+      var z=JH.ZONES[zn];
+      var rows=z.nbs.filter(function(nb){return !q||(nb[0]+' '+nb[1]).toLowerCase().indexOf(q)>=0;});
+      if(!rows.length)return;
+      shown+=rows.length;
+      var al=(z.alias||'').split('/')[0];
+      jump+='<a href="#'+slug(zn)+'">'+zn+'</a>';
+      h+='<div class="zhead" id="'+slug(zn)+'" onclick="JHU.open(&quot;zone&quot;,&quot;'+U.esc(zn)+'&quot;)"><div class="zn">'+zn+(al&&al!==zn?'<small>'+al+'</small>':'')+'<small>'+rows.length+' 个社区</small></div><span class="zl">生活圈详情 →</span></div>';
+      h+=rows.map(row).join('');
+    });
+    document.getElementById('jump').innerHTML=state.zone?'':jump;
+    document.getElementById('body').innerHTML=h||'<div class="empty">没有匹配的社区，试试英文名或换个关键词</div>';
+    var qEl=document.getElementById('q');if(qEl.value!==state.q)qEl.value=state.q;
+  }
+  document.getElementById('q').oninput=function(){state.q=this.value.trim();paint();};
+  paint();
+})();
+</script>
+</body>
+</html>
