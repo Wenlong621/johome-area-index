@@ -11,8 +11,8 @@
 <div class="ph"><div class="scr"><div class="sb"><span>9:41</span><span class="ri">📶 🔋</span></div><div class="app">
 <div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">生活圈索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
 <div class="wrap">
-  <div class="crumb"><a href="index.html">区域找房</a> / 生活圈</div>
   <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索生活圈（如 铁道镇 / Metrotown / 学区）"/></div>
+  <div class="chips" id="hot"></div>
   <div class="chips" id="cityChips"></div>
   <div class="chips" id="sort"></div>
   <div id="body"></div>
@@ -24,7 +24,7 @@
 <script>
 (function(){
   var U=window.JHU;
-  var state={q:'',city:U.param('city')||'全部',sort:'默认'};
+  var state={q:'',city:U.param('city')||'全部',sort:'默认',hot:U.param('hot')==='1'};
   var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','社区数 ↓'];
   function card(zn){
     var z=JH.ZONES[zn],s=JH.ZSTATS[zn],al=(z.alias||'').split('/')[0];
@@ -36,12 +36,14 @@
       +'<div class="sub"><a href="communities.html?zone='+encodeURIComponent(zn)+'" onclick="event.stopPropagation()">查看 '+z.nbs.length+' 个社区 →</a></div></div></div>';
   }
   function paint(){
+    U.hotRow(document.getElementById('hot'),'zone',function(){state.hot=!state.hot;paint();},state.hot);
     var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
     cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+p+'</span>';}).join('');
     Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');paint();};});
     var s=document.getElementById('sort');s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
     Array.prototype.forEach.call(s.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});
     var zs=U.zonesOfCity(state.city).filter(function(zn){var q=state.q.toLowerCase();if(!q)return true;var z=JH.ZONES[zn];return (zn+' '+(z.alias||'')+' '+z.cities.join(' ')+' '+(z.tags||[]).join(' ')+' '+z.anchor).toLowerCase().indexOf(q)>=0;});
+    if(state.hot&&!state.q)zs=zs.filter(function(zn){return U.HOTZ.indexOf(zn)>=0;});
     if(state.sort==='价格 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].med-JH.ZSTATS[a].med;});
     else if(state.sort==='价格 ↑')zs.sort(function(a,b){return JH.ZSTATS[a].med-JH.ZSTATS[b].med;});
     else if(state.sort==='涨幅 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].gain-JH.ZSTATS[a].gain;});

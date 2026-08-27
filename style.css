@@ -26,6 +26,8 @@ a{text-decoration:none;color:inherit}
 .chips{display:flex;gap:7px;overflow-x:auto;padding-bottom:4px;margin-bottom:10px;-webkit-overflow-scrolling:touch}
 .chip{flex:none;border:1px solid #E2E8F2;background:#fff;color:#5A6678;border-radius:99px;padding:5px 12px;font-size:12px;cursor:pointer;white-space:nowrap}
 .chip.on{border-color:#1E63DE;background:#E9F1FE;color:#1E63DE;font-weight:600}
+.chip.fire{border-color:#F5C089;background:#FFF7EE;color:#C05621}
+.chip.fire.on{border-color:#E4762A;background:#E4762A;color:#fff;font-weight:600}
 .sec{font-size:13px;font-weight:700;margin:16px 2px 9px;display:flex;align-items:baseline;gap:7px}
 .sec .n{font-size:11px;color:#7A8699;font-weight:400}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
