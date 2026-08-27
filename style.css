@@ -36,6 +36,7 @@ a{text-decoration:none;color:inherit}
 .nchip:hover{border-color:#1E63DE;color:#1E63DE}
 #hot .nchip{border-color:#F5C089;background:#FFF7EE;color:#C05621}
 #hot .nchip:hover{border-color:#E4762A;background:#E4762A;color:#fff}
+.divider{height:1px;background:#DDE4EE;margin:11px -14px 2px}
 .sec{font-size:13px;font-weight:700;margin:16px 2px 9px;display:flex;align-items:baseline;gap:7px}
 .sec .n{font-size:11px;color:#7A8699;font-weight:400}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
