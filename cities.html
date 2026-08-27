@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>城市索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827a"/>
+<link rel="stylesheet" href="style.css?v=20260827b"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -12,14 +12,15 @@
 <div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">城市索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
 <div class="wrap">
   <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索城市（如 Burnaby / 列治文）"/></div>
-  <div class="chips" id="hot"></div>
+  <div id="hist"></div>
+  <div id="hot"></div>
   <div class="chips" id="sort"></div>
   <div id="body"></div>
   <div class="foot">数据为原型示意 · 与 Johome Buying AI 原型同源同口径<br/>图片来自 Wikimedia Commons · 点击卡片进入城市详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827a"></script>
-<script src="shared.js?v=20260827a"></script>
+<script src="data.js?v=20260827b"></script>
+<script src="shared.js?v=20260827b"></script>
 <script>
 (function(){
   var U=window.JHU,VAC={'Sunshine Coast':1,'Squamish':1,'Whistler':1};
@@ -36,7 +37,7 @@
       +'<div class="stats"><span class="v">'+a[2]+'</span><span class="g">'+a[4]+'</span><span class="m">近一年</span></div>'+sub+'</div></div>';
   }
   function paint(){
-    try{U.hotStrip(document.getElementById('hot'),'city',!!state.q);}catch(e){}
+    try{U.histRow(document.getElementById('hist'),'city',!!state.q,paint);U.hotNames(document.getElementById('hot'),'city',!!state.q);}catch(e){}
     var s=document.getElementById('sort');s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
     Array.prototype.forEach.call(s.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});
     var names=Object.keys(JH.CITYCARD).filter(function(n){var q=state.q.toLowerCase();return !q||(n+' '+(CITY_ALIAS[n]||'')+' '+JH.CITYCARD[n][1]).toLowerCase().indexOf(q)>=0;});

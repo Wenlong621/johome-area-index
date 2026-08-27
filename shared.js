@@ -1,6 +1,10 @@
 window.JHU=(function(){
   var PROTO='https://wenlong621.github.io/johome-ai-prototype/';
-  function open(kind,name,city){var u=PROTO+'?open='+encodeURIComponent(kind+':'+name+(city?(':'+city):''));window.open(u,'_blank');}
+  function histKey(k){return 'jh_hist_'+k;}
+  function histGet(k){try{var a=JSON.parse(localStorage.getItem(histKey(k))||'[]');return (a instanceof Array)?a:[];}catch(e){return [];}}
+  function histPush(k,n,c){try{var a=histGet(k).filter(function(x){return x&&x.n!==n;});a.unshift({n:n,c:c||''});localStorage.setItem(histKey(k),JSON.stringify(a.slice(0,10)));}catch(e){}}
+  function histClear(k){try{localStorage.removeItem(histKey(k));}catch(e){}}
+  function open(kind,name,city){histPush(kind,name,city);var u=PROTO+'?open='+encodeURIComponent(kind+':'+name+(city?(':'+city):''));window.open(u,'_blank');}
   function param(k){var m=location.search.match(new RegExp('[?&]'+k+'=([^&]+)'));return m?decodeURIComponent(m[1].replace(/\+/g,' ')):'';}
   function primList(){var seen={},r=[],k;for(k in JH.ZONES){var p=JH.ZONES[k].prim;if(!seen[p]){seen[p]=1;r.push(p);}}return r;}
   function zonesOfCity(c){var r=[],k;for(k in JH.ZONES){if(!c||c==='全部'||JH.ZONES[k].prim===c)r.push(k);}return r;}
@@ -10,17 +14,31 @@ window.JHU=(function(){
   var HOTC=['Burnaby','Richmond','Vancouver West','Surrey','Coquitlam','West Vancouver'];
   var HOTZ=['Metrotown','Brentwood','Downtown','Kitsilano','Surrey Central','Coquitlam Centre','Kerrisdale / Dunbar','Richmond Centre (Brighouse)'];
   function hotNbs(){return HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){return JH.ZONES[z].nbs[0];});}
-  function hotStrip(el,kind,hidden){
-    if(hidden){el.innerHTML='';el.style.display='none';return;}
-    el.className='';el.style.display='block';
-    var t,items;
-    if(kind==='city'){t='🔥 热门城市';items=HOTC.map(function(n){var a=JH.CITYCARD[n];return {k:'city',n:n,sub:a[1],img:cityImg(n),v:a[2],g:a[4]};});}
-    else if(kind==='zone'){t='🔥 热门生活圈';items=HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){var s=JH.ZSTATS[z],al=(JH.ZONES[z].alias||'').split('/')[0];return {k:'zone',n:z,sub:(al!==z?al+' · ':'')+JH.ZONES[z].nbs.length+' 个社区',img:cityImg(JH.ZONES[z].prim),v:'$'+s.med+'万',g:'+'+s.gain+'%'};});}
-    else{t='🔥 热门社区';items=HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){var p=JH.ZONES[z].nbs[0];return {k:'nb',n:p[0],c:p[1],sub:p[1],img:cityImg(JH.ZONES[z].prim),v:'$'+p[2]+'万',g:'+'+p[3]+'%'};});}
-    el.innerHTML='<div class="sec" style="margin:2px 2px 8px">'+t+'</div><div class="hstrip">'+items.map(function(it){
-      return '<div class="card hcard" data-k="'+it.k+'" data-n="'+esc(it.n)+'" data-c="'+esc(it.c||'')+'">'+img(it.img,58)+'<div class="cb"><div class="nm">'+it.n+'</div><div class="al">'+it.sub+'</div><div class="stats"><span class="v" style="font-size:12px">'+it.v+'</span><span class="g" style="font-size:10px">'+it.g+'</span></div></div></div>';
-    }).join('')+'</div>';
-    Array.prototype.forEach.call(el.querySelectorAll('.hcard'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});
+  var KLAB={city:'城市',zone:'生活圈',nb:'社区'};
+  function bindChips(el){Array.prototype.forEach.call(el.querySelectorAll('.nchip[data-n]'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});}
+  function chipRow(title,extra,items){
+    return '<div class="nrow"><div class="nlab">'+title+extra+'</div><div class="nchips">'+items.map(function(it){
+      return '<span class="nchip" data-k="'+it.k+'" data-n="'+esc(it.n)+'" data-c="'+esc(it.c||'')+'">'+it.n+'</span>';
+    }).join('')+'</div></div>';
   }
-  return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotStrip:hotStrip};
+  function hotItems(kind){
+    if(kind==='city')return HOTC.filter(function(n){return JH.CITYCARD[n];}).map(function(n){return {k:'city',n:n};});
+    if(kind==='zone')return HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){return {k:'zone',n:z};});
+    return HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){var p=JH.ZONES[z].nbs[0];return {k:'nb',n:p[0],c:p[1]};});
+  }
+  function hotNames(el,kind,hidden){
+    if(hidden){el.innerHTML='';el.style.display='none';return;}
+    el.style.display='block';
+    el.innerHTML=chipRow('🔥 热门'+KLAB[kind],'',hotItems(kind));
+    bindChips(el);
+  }
+  function histRow(el,kind,hidden,onChange){
+    var a=histGet(kind);
+    if(hidden||!a.length){el.innerHTML='';el.style.display='none';return;}
+    el.style.display='block';
+    el.innerHTML=chipRow('🕘 历史搜索'+KLAB[kind],'<span class="nclr" id="histClr">清除</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
+    bindChips(el);
+    var b=el.querySelector('#histClr');if(b)b.onclick=function(){histClear(kind);if(onChange)onChange();};
+  }
+  return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotNames:hotNames,histRow:histRow,histGet:histGet,histPush:histPush,histClear:histClear};
 })();

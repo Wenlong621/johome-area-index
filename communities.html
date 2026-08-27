@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827a"/>
+<link rel="stylesheet" href="style.css?v=20260827b"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -12,15 +12,16 @@
 <div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">MLS 社区索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
 <div class="wrap">
   <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索社区（如 Kitsilano / Metrotown）"/></div>
-  <div class="chips" id="hot"></div>
+  <div id="hist"></div>
+  <div id="hot"></div>
   <div class="chips" id="cityChips"></div>
   <div class="jump" id="jump"></div>
   <div id="body"></div>
   <div class="foot">338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827a"></script>
-<script src="shared.js?v=20260827a"></script>
+<script src="data.js?v=20260827b"></script>
+<script src="shared.js?v=20260827b"></script>
 <script>
 (function(){
   var U=window.JHU;
@@ -33,7 +34,7 @@
       +'<div class="pr"><div class="v" style="font-weight:400;font-size:11px;color:#7A8699">'+nb[4]+' 套在售</div></div><span class="ar">›</span></div>';
   }
   function paint(){
-    try{U.hotStrip(document.getElementById('hot'),'nb',!!state.q||!!state.zone||state.city!=='全部');}catch(e){}
+    try{U.histRow(document.getElementById('hist'),'nb',!!state.q||!!state.zone||state.city!=='全部',paint);U.hotNames(document.getElementById('hot'),'nb',!!state.q||!!state.zone||state.city!=='全部');}catch(e){}
     var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
     cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+p+'</span>';}).join('');
     Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');state.zone='';paint();};});
