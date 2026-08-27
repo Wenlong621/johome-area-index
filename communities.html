@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827d"/>
+<link rel="stylesheet" href="style.css?v=20260827e"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -21,18 +21,18 @@
   <div class="foot">338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827d"></script>
-<script src="shared.js?v=20260827d"></script>
+<script src="data.js?v=20260827e"></script>
+<script src="shared.js?v=20260827e"></script>
 <script>
 (function(){
   var U=window.JHU;
   var state={q:U.param('q'),city:U.param('city')||'全部',zone:U.param('zone')};
   function slug(z){return 'z-'+z.replace(/[^A-Za-z0-9]+/g,'-');}
-  function row(nb){
-    return '<div class="row" onclick="JHU.open(&quot;nb&quot;,&quot;'+U.esc(nb[0])+'&quot;,&quot;'+U.esc(nb[1])+'&quot;)">'
-      +'<div class="nm">'+nb[0]+'<small>'+nb[1]+'</small></div>'
-      +'<div class="pr"><div class="v">$'+nb[2]+'万</div><div class="g">+'+nb[3]+'% 近一年</div></div>'
-      +'<div class="pr"><div class="v" style="font-weight:400;font-size:11px;color:#7A8699">'+nb[4]+' 套在售</div></div><span class="ar">›</span></div>';
+  function card(nb){
+    return '<div class="card ccard" onclick="JHU.open(&quot;nb&quot;,&quot;'+U.esc(nb[0])+'&quot;,&quot;'+U.esc(nb[1])+'&quot;)">'+U.img(U.cityImg(nb[1]),74)
+      +'<div class="cb"><div class="nm">'+nb[0]+'</div><div class="al">'+nb[1]+'</div>'
+      +'<div class="stats"><span class="v">$'+nb[2]+'万</span><span class="g">+'+nb[3]+'%</span></div>'
+      +'<div class="sub"><a onclick="event.stopPropagation()">在售 '+nb[4]+' 套</a></div></div></div>';
   }
   function paint(){
     try{U.histRow(document.getElementById('hist'),'nb',!!state.q||!!state.zone||state.city!=='全部',paint);U.hotNames(document.getElementById('hot'),'nb',!!state.q||!!state.zone||state.city!=='全部');}catch(e){}
@@ -49,7 +49,7 @@
       var al=(z.alias||'').split('/')[0];
       jump+='<a href="#'+slug(zn)+'">'+zn+'</a>';
       h+='<div class="zhead" id="'+slug(zn)+'" onclick="JHU.open(&quot;zone&quot;,&quot;'+U.esc(zn)+'&quot;)"><div class="zn">'+zn+(al&&al!==zn?'<small>'+al+'</small>':'')+'<small>'+rows.length+' 个社区</small></div><span class="zl">生活圈详情 →</span></div>';
-      h+=rows.map(row).join('');
+      h+='<div class="gridN">'+rows.map(card).join('')+'</div>';
     });
     document.getElementById('jump').innerHTML=state.zone?'':jump;
     document.getElementById('body').innerHTML=h||'<div class="empty">没有匹配的社区，试试英文名或换个关键词</div>';
