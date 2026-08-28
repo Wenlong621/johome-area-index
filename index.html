@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Johome 区域找房 · 大温及周边</title>
-<link rel="stylesheet" href="style.css?v=20260828c"/>
+<link rel="stylesheet" href="style.css?v=20260828d"/>
 </head>
 <body>
 <div class="cap" id="cap"></div>
@@ -21,29 +21,29 @@
   <div class="foot" id="foot"></div>
 </div>
 </div></div></div>
-<script src="i18n.js?v=20260828c"></script>
-<script src="data.js?v=20260828c"></script>
-<script src="shared.js?v=20260828c"></script>
+<script src="i18n.js?v=20260828d"></script>
+<script src="data.js?v=20260828d"></script>
+<script src="shared.js?v=20260828d"></script>
 <script>
 (function(){
   var U=window.JHU,I=window.JHI,T=I.t;
   document.documentElement.lang=I.LANG;
   document.title=T('Johome 区域找房 · 大温及周边','Johome Area Finder · Metro Vancouver & beyond');
-  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / District / Neighbourhood three-level index');
+  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / Lifestyle zone / Neighbourhood three-level index');
   document.getElementById('ttl').textContent=T('区域找房 · 大温及周边','Area finder · Metro Vancouver');
   document.getElementById('aiBtn').textContent=T('✦ AI 帮我选','✦ Ask AI');
   document.getElementById('q').placeholder=T('搜索城市 / 生活圈 / 社区（回车跳转）','Search city / district / neighbourhood (press Enter)');
   document.getElementById('secCities').textContent=T('热门城市','Popular cities');
-  document.getElementById('secZones').textContent=T('热门生活圈','Popular districts');
-  document.getElementById('foot').innerHTML=T('城市 → 生活圈 → MLS 社区 三级索引 · 数据为原型示意（与 Buying AI 原型同源同口径）<br/>图片来自 Wikimedia Commons','City → District → MLS neighbourhood · prototype data for illustration (same source and definitions as the Buying AI prototype)<br/>Images from Wikimedia Commons');
+  document.getElementById('secZones').textContent=T('热门生活圈','Popular lifestyle zones');
+  document.getElementById('foot').innerHTML=T('城市 → 生活圈 → MLS 社区 三级索引 · 数据为原型示意（与 Buying AI 原型同源同口径）<br/>图片来自 Wikimedia Commons','City → Lifestyle zone → MLS neighbourhood · prototype data for illustration (same source and definitions as the Buying AI prototype)<br/>Images from Wikimedia Commons');
   document.getElementById('cta').innerHTML='<div style="font-size:22px">✦</div><div style="flex:1"><b>'+T('不知道从哪开始？让 AI 帮你选','Not sure where to start? Let AI help')+'</b><p>'+T('买房 · 选区 · 投资，多轮问诊帮你把需求想清楚','Buying, choosing an area, investing — a guided chat to clarify what you need')+'</p></div><span style="font-size:16px">›</span>';
   document.getElementById('cta').onclick=function(){window.open(U.PROTO,'_blank');};
   I.mountToggle(document.getElementById('bar'));
   var nbTot=0,zTot=0,k;for(k in JH.ZONES){zTot++;nbTot+=JH.ZONES[k].nbs.length;}
   var cTot=Object.keys(JH.CITYCARD).length;
   var E=[['cities.html','🏙️',T('城市','Cities'),T('按行政市浏览：售出中位价、涨幅与城市定位','Browse by municipality: median sold price, growth and positioning'),cTot],
-         ['zones.html','🗺️',T('生活圈','Districts'),T('本地人熟知的认知型区域，多个 MLS 社区聚合、可跨市','Areas locals recognise — groups of MLS neighbourhoods, can cross city lines'),zTot],
-         ['communities.html','🏘️',T('MLS 社区','MLS neighbourhoods'),T('最细颗粒度：按生活圈分组的全部挂盘社区','Finest level: every listed neighbourhood, grouped by district'),nbTot]];
+         ['zones.html','🗺️',T('生活圈','Lifestyle zones'),T('本地人熟知的认知型区域，多个 MLS 社区聚合、可跨市','Areas locals recognise — groups of MLS neighbourhoods, can cross city lines'),zTot],
+         ['communities.html','🏘️',T('MLS 社区','MLS neighbourhoods'),T('最细颗粒度：按生活圈分组的全部挂盘社区','Finest level: every listed neighbourhood, grouped by lifestyle zone'),nbTot]];
   document.getElementById('entries').innerHTML=E.map(function(e){
     return '<div class="entry" onclick="location.href=&quot;'+e[0]+'&quot;"><div class="ei">'+e[1]+'</div><div class="et"><b>'+e[2]+'</b><p>'+e[3]+'</p></div><div class="en">'+e[4]+'</div><span class="ar">›</span></div>';
   }).join('');

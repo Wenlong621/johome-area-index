@@ -16,7 +16,7 @@ window.JHU=(function(){
   var HOTZ=['Metrotown','Brentwood','Downtown','Kitsilano','Surrey Central','Coquitlam Centre','Kerrisdale / Dunbar','Richmond Centre (Brighouse)'];
   function hotNbs(){return HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){return JH.ZONES[z].nbs[0];});}
   var T=window.JHI.t;
-  var KLAB={city:T('城市','cities'),zone:T('生活圈','districts'),nb:T('社区','neighbourhoods')};
+  var KLAB={city:T('城市','cities'),zone:T('生活圈','lifestyle zones'),nb:T('社区','neighbourhoods')};
   function bindChips(el){Array.prototype.forEach.call(el.querySelectorAll('.nchip[data-n]'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});}
   function chipRow(title,extra,items){
     return '<div class="nrow"><div class="nlab">'+title+extra+'</div><div class="nchips">'+items.map(function(it){

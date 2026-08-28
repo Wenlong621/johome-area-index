@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260828c"/>
+<link rel="stylesheet" href="style.css?v=20260828d"/>
 </head>
 <body>
 <div class="cap" id="cap"></div>
@@ -24,19 +24,19 @@
   <div class="foot" id="foot"></div>
 </div>
 </div></div></div>
-<script src="i18n.js?v=20260828c"></script>
-<script src="data.js?v=20260828c"></script>
-<script src="shared.js?v=20260828c"></script>
+<script src="i18n.js?v=20260828d"></script>
+<script src="data.js?v=20260828d"></script>
+<script src="shared.js?v=20260828d"></script>
 <script>
 (function(){
   var U=window.JHU,I=window.JHI,T=I.t;
   document.documentElement.lang=I.LANG;
   document.title=T('社区索引 · Johome 区域找房','Neighbourhoods · Johome Area Finder');
-  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / District / Neighbourhood three-level index');
+  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / Lifestyle zone / Neighbourhood three-level index');
   document.getElementById('ttl').textContent=T('MLS 社区索引','MLS neighbourhoods');
   document.getElementById('aiBtn').textContent=T('✦ AI 帮我选','✦ Ask AI');
   document.getElementById('q').placeholder=T('搜索社区（如 Kitsilano / Metrotown）','Search neighbourhoods (e.g. Kitsilano)');
-  document.getElementById('foot').innerHTML=T('338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）','338 MLS neighbourhoods · grouped by district (GVR + FVREB official sub-area mapping, one district each)<br/>Prototype data for illustration · tap a neighbourhood to open its page in the AI assistant');
+  document.getElementById('foot').innerHTML=T('338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）','338 MLS neighbourhoods · grouped by lifestyle zone (GVR + FVREB official sub-area mapping, one zone each)<br/>Prototype data for illustration · tap a neighbourhood to open its page in the AI assistant');
   I.mountToggle(document.getElementById('bar'));
   var SORTS=[[T('默认','Default'),'d'],[T('价格 ↓','Price ↓'),'pd'],[T('价格 ↑','Price ↑'),'pa'],[T('涨幅 ↓','Growth ↓'),'gd'],[T('涨幅 ↑','Growth ↑'),'ga'],[T('在售 ↓','Listings ↓'),'ad']];
   var state={q:U.param('q'),city:U.param('city')||'全部',zone:U.param('zone'),sort:'d'};
@@ -57,7 +57,7 @@
       JH.ZONES[zn].nbs.forEach(function(nb){if(!q||(nb[0]+' '+nb[1]).toLowerCase().indexOf(q)>=0)items.push([nb[0],nb[1],nb[2],nb[3],nb[4],zn]);});
     });
     var jw=document.getElementById('jump');
-    jw.innerHTML=q?'':['<a data-z="" class="'+(state.zone?'':'on')+'">'+T('全部生活圈','All districts')+'</a>'].concat(all.map(function(zn){
+    jw.innerHTML=q?'':['<a data-z="" class="'+(state.zone?'':'on')+'">'+T('全部生活圈','All lifestyle zones')+'</a>'].concat(all.map(function(zn){
       return '<a data-z="'+U.esc(zn)+'" class="'+(state.zone===zn?'on':'')+'">'+zn+'</a>';
     })).join('');
     Array.prototype.forEach.call(jw.querySelectorAll('a[data-z]'),function(el){el.onclick=function(){state.zone=el.getAttribute('data-z');paint();};});

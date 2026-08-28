@@ -30,7 +30,7 @@ a{text-decoration:none;color:inherit}
 .langBtn:hover{background:rgba(255,255,255,.3)}
 html[lang=en] #cityChips::before{content:'City: '}
 html[lang=en] #sort::before{content:'Sort: '}
-html[lang=en] .jump::before{content:'District: '}
+html[lang=en] .jump::before{content:'Zone: '}
 #cityChips::before{content:'所在城市：';flex:none;align-self:center;font-size:11.5px;color:#7A8699;position:sticky;left:0;background:#F4F6FA;padding-right:2px;z-index:1}
 #sort::before{content:'排序：';flex:none;align-self:center;font-size:11.5px;color:#7A8699;position:sticky;left:0;background:#F4F6FA;padding-right:2px;z-index:1}
 .nrow{margin-bottom:9px}
