@@ -53,7 +53,11 @@ html[lang=en] .jump::before{content:'District: '}
 .note summary::after{content:' ▾'}
 .note details[open] summary::after{content:' ▴'}
 .note details em{display:block;margin-top:5px}
+.stick{position:sticky;top:0;z-index:5;background:#F4F6FA;margin:0 -14px;padding:8px 14px 0}
+.stick .chips,.stick .jump{margin-bottom:7px}
+.stick .chips:last-of-type{margin-bottom:2px}
 .divider{height:1px;background:#DDE4EE;margin:11px -14px 2px}
+.stick .divider{margin:6px -14px 0}
 .sec{font-size:13px;font-weight:700;margin:16px 2px 9px;display:flex;align-items:baseline;gap:7px}
 .sec .n{font-size:11px;color:#7A8699;font-weight:400}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}

@@ -53,6 +53,12 @@ window.JHU=(function(){
       +'<div class="met"><div class="v">'+o.m2v+'</div><div class="l">'+o.m2l+'</div></div></div>'
       +'<div class="gain">'+T('近一年','Past 12 mo')+' <b>'+o.gain+'</b></div></div></div>';
   }
+  function mountSticky(){
+    var h=document.querySelector('.hdr'),s=document.getElementById('stick');
+    if(!h||!s)return;
+    function set(){s.style.top=Math.round(h.getBoundingClientRect().height)+'px';}
+    set();window.addEventListener('resize',set);setTimeout(set,300);
+  }
   function bindCards(el){Array.prototype.forEach.call(el.querySelectorAll('.bcard[data-n]'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});}
-  return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,bigCard:bigCard,bindCards:bindCards,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotNames:hotNames,histRow:histRow,histGet:histGet,histPush:histPush,histClear:histClear};
+  return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,bigCard:bigCard,bindCards:bindCards,mountSticky:mountSticky,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotNames:hotNames,histRow:histRow,histGet:histGet,histPush:histPush,histClear:histClear};
 })();

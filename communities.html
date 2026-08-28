@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260828a"/>
+<link rel="stylesheet" href="style.css?v=20260828b"/>
 </head>
 <body>
 <div class="cap" id="cap"></div>
@@ -14,17 +14,19 @@
   <div class="search"><span class="ic">🔍</span><input id="q"/></div>
   <div id="hist"></div>
   <div id="hot"></div>
-  <div class="chips" id="cityChips"></div>
-  <div class="jump" id="jump"></div>
-  <div class="chips" id="sort"></div>
-  <div class="divider"></div>
+  <div class="stick" id="stick">
+    <div class="chips" id="cityChips"></div>
+    <div class="jump" id="jump"></div>
+    <div class="chips" id="sort"></div>
+    <div class="divider"></div>
+  </div>
   <div id="body"></div>
   <div class="foot" id="foot"></div>
 </div>
 </div></div></div>
-<script src="i18n.js?v=20260828a"></script>
-<script src="data.js?v=20260828a"></script>
-<script src="shared.js?v=20260828a"></script>
+<script src="i18n.js?v=20260828b"></script>
+<script src="data.js?v=20260828b"></script>
+<script src="shared.js?v=20260828b"></script>
 <script>
 (function(){
   var U=window.JHU,I=window.JHI,T=I.t;
@@ -74,6 +76,7 @@
   }
   document.getElementById('q').oninput=function(){state.q=this.value.trim();paint();};
   paint();
+  U.mountSticky();
 })();
 </script>
 </body>
