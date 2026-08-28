@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>生活圈索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827p"/>
+<link rel="stylesheet" href="style.css?v=20260827q"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -22,8 +22,8 @@
   <div class="foot">生活圈 = 多个 MLS 社区聚合的本地人熟知区域 · 全大温 34 个、覆盖 338 个 MLS 社区（无重叠无遗漏）<br/>数据为原型示意 · 点击卡片进入生活圈详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827p"></script>
-<script src="shared.js?v=20260827p"></script>
+<script src="data.js?v=20260827q"></script>
+<script src="shared.js?v=20260827q"></script>
 <script>
 (function(){
   var U=window.JHU;
@@ -38,9 +38,9 @@
       +'<div class="stats"><span class="v">$'+s.med+'万</span><span class="g">+'+s.gain+'%</span><span class="m">在售 '+s.active+'</span></div></div></div>';
   }
   function paint(){
-    try{U.histRow(document.getElementById('hist'),'zone',!!state.q||state.city!=='全部',paint);U.hotNames(document.getElementById('hot'),'zone',!!state.q||state.city!=='全部');}catch(e){}
+    try{U.histRow(document.getElementById('hist'),'zone',!!state.q,paint);U.hotNames(document.getElementById('hot'),'zone',!!state.q);}catch(e){}
     var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
-    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+p+'</span>';}).join('');
+    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+(p==='全部'?'全部城市':p)+'</span>';}).join('');
     Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');paint();};});
     var s=document.getElementById('sort');s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
     Array.prototype.forEach.call(s.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});

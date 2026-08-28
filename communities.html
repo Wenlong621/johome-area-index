@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827p"/>
+<link rel="stylesheet" href="style.css?v=20260827q"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -22,8 +22,8 @@
   <div class="foot">338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827p"></script>
-<script src="shared.js?v=20260827p"></script>
+<script src="data.js?v=20260827q"></script>
+<script src="shared.js?v=20260827q"></script>
 <script>
 (function(){
   var U=window.JHU;
@@ -37,9 +37,9 @@
       +'<div class="sub"><a onclick="event.stopPropagation()">在售 '+nb[4]+' 套</a></div></div></div>';
   }
   function paint(){
-    try{U.histRow(document.getElementById('hist'),'nb',!!state.q||!!state.zone||state.city!=='全部',paint);U.hotNames(document.getElementById('hot'),'nb',!!state.q||!!state.zone||state.city!=='全部');}catch(e){}
+    try{U.histRow(document.getElementById('hist'),'nb',!!state.q,paint);U.hotNames(document.getElementById('hot'),'nb',!!state.q);}catch(e){}
     var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
-    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+p+'</span>';}).join('');
+    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+(p==='全部'?'全部城市':p)+'</span>';}).join('');
     Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');state.zone='';paint();};});
     var q=state.q.toLowerCase(),all=U.zonesOfCity(state.city),zs=all,items=[];
     if(state.zone&&JH.ZONES[state.zone])zs=[state.zone];
