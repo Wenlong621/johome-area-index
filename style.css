@@ -31,6 +31,7 @@ a{text-decoration:none;color:inherit}
 .nlab{font-size:12px;font-weight:600;color:#3C4759;margin:0 2px 7px;display:flex;align-items:center}
 .nclr{margin-left:auto;font-size:11px;font-weight:400;color:#9AA6B8;cursor:pointer}
 .nclr:hover{color:#E4762A}
+.hint{font-size:11px;color:#9AA6B8;padding:2px 2px 3px}
 .nchips{display:flex;flex-wrap:nowrap;gap:7px;overflow-x:auto;padding-bottom:3px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .nchips::-webkit-scrollbar{height:0}
 .nchip{flex:none;white-space:nowrap;border:1px solid #E2E8F2;background:#fff;color:#3C4759;border-radius:99px;padding:5px 12px;font-size:12px;cursor:pointer;line-height:1.3}
@@ -51,6 +52,19 @@ a{text-decoration:none;color:inherit}
 .sec .n{font-size:11px;color:#7A8699;font-weight:400}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px}
 .gridZ{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.bcard{position:relative;background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 1px 3px rgba(20,40,80,.09);cursor:pointer}
+.bcard .bg{position:absolute;top:0;right:0;bottom:0;left:0;background-size:cover;background-position:center;opacity:.14}
+.bcard .cb{position:relative;padding:11px 11px 12px}
+.bcard .nm{font-size:14.5px;font-weight:600;line-height:1.25;color:#1B2330}
+.bcard .sub2{font-size:12px;color:#4A5666;margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bcard .kind{display:inline-block;background:#DCE9FB;color:#1E63DE;font-size:10.5px;border-radius:9px;padding:2px 10px;margin:6px 0 5px}
+.bcard .tg{font-size:10.5px;color:#5A6678;line-height:1.45;height:30px;overflow:hidden}
+.bcard .mets{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:2px}
+.bcard .met{background:rgba(211,229,251,.72);border-radius:8px;padding:6px 7px}
+.bcard .met .v{font-size:13px;font-weight:600;color:#1B2330;white-space:nowrap}
+.bcard .met .l{font-size:9.5px;color:#5A6678;margin-top:1px;white-space:nowrap}
+.bcard .gain{font-size:10.5px;color:#5A6678;margin-top:7px}
+.bcard .gain b{color:#0E9F6E;font-weight:600}
 .card{background:#fff;border-radius:13px;overflow:hidden;box-shadow:0 1px 3px rgba(20,40,80,.07);cursor:pointer;display:flex;flex-direction:column}
 .card:hover{box-shadow:0 3px 10px rgba(20,40,80,.13)}
 .card img{width:100%;height:92px;object-fit:cover;display:block;background:#DEE7F5}

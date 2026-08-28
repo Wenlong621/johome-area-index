@@ -34,11 +34,24 @@ window.JHU=(function(){
   }
   function histRow(el,kind,hidden,onChange){
     var a=histGet(kind);
-    if(hidden||!a.length){el.innerHTML='';el.style.display='none';return;}
+    if(hidden){el.innerHTML='';el.style.display='none';return;}
     el.style.display='block';
+    if(!a.length){el.innerHTML='<div class="nrow"><div class="nlab">🕘 历史搜索</div><div class="hint">你点开过的'+KLAB[kind]+'会记录在这里，方便下次快速回到</div></div>';return;}
     el.innerHTML=chipRow('🕘 历史搜索','<span class="nclr" id="histClr">清除</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
     bindChips(el);
     var b=el.querySelector('#histClr');if(b)b.onclick=function(){histClear(kind);if(onChange)onChange();};
   }
-  return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotNames:hotNames,histRow:histRow,histGet:histGet,histPush:histPush,histClear:histClear};
+  function bigCard(o){
+    return '<div class="bcard" data-k="'+o.k+'" data-n="'+esc(o.n)+'" data-c="'+esc(o.c||'')+'">'
+      +(o.img?'<div class="bg" style="background-image:url('+esc(o.img)+')"></div>':'')
+      +'<div class="cb"><div class="nm">'+o.n+'</div>'
+      +(o.sub?'<div class="sub2">'+o.sub+'</div>':'')
+      +'<div class="kind">'+o.kind+'</div>'
+      +(o.tg?'<div class="tg">'+o.tg+'</div>':'')
+      +'<div class="mets"><div class="met"><div class="v">'+o.m1v+'</div><div class="l">'+o.m1l+'</div></div>'
+      +'<div class="met"><div class="v">'+o.m2v+'</div><div class="l">'+o.m2l+'</div></div></div>'
+      +'<div class="gain">近一年 <b>'+o.gain+'</b></div></div></div>';
+  }
+  function bindCards(el){Array.prototype.forEach.call(el.querySelectorAll('.bcard[data-n]'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});}
+  return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,bigCard:bigCard,bindCards:bindCards,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotNames:hotNames,histRow:histRow,histGet:histGet,histPush:histPush,histClear:histClear};
 })();
