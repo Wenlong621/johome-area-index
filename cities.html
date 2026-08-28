@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>城市索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827o"/>
+<link rel="stylesheet" href="style.css?v=20260827p"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -20,13 +20,14 @@
   <div class="foot">数据为原型示意 · 与 Johome Buying AI 原型同源同口径<br/>图片来自 Wikimedia Commons · 点击卡片进入城市详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827o"></script>
-<script src="shared.js?v=20260827o"></script>
+<script src="data.js?v=20260827p"></script>
+<script src="shared.js?v=20260827p"></script>
 <script>
 (function(){
   var U=window.JHU,VAC={'Sunshine Coast':1,'Squamish':1,'Whistler':1};
   var state={q:'',sort:'默认'};
-  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓'];
+  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','涨幅 ↑','在售 ↓'];
+  function cityActive(c){var a=0,k;for(k in JH.ZONES){if(JH.ZONES[k].prim===c)a+=JH.ZSTATS[k].active;}return a;}
   var CITY_ALIAS={'Richmond':'列治文','Burnaby':'本拿比','Surrey':'素里','Vancouver West':'温西','Vancouver East':'温东','West Vancouver':'西温','North Vancouver':'北温','New Westminster':'新西敏','Coquitlam':'高贵林','Port Moody':'满地宝','Langley':'兰里','Delta':'三角洲','Abbotsford':'阿伯茨福德','Mission':'米逊','Chilliwack':'奇利瓦克','Whistler':'惠斯勒','Squamish':'斯阔米什','Sunshine Coast':'阳光海岸'};
   function zoneCnt(c){var z=0,nb=0,k;for(k in JH.ZONES){if(JH.ZONES[k].prim===c){z++;nb+=JH.ZONES[k].nbs.length;}}return [z,nb];}
   function num(s){return parseFloat((''+s).replace(/[^0-9.]/g,''))||0;}
@@ -45,6 +46,8 @@
     if(state.sort==='价格 ↓')names.sort(function(a,b){return num(JH.CITYCARD[b][2])-num(JH.CITYCARD[a][2]);});
     else if(state.sort==='价格 ↑')names.sort(function(a,b){return num(JH.CITYCARD[a][2])-num(JH.CITYCARD[b][2]);});
     else if(state.sort==='涨幅 ↓')names.sort(function(a,b){return num(JH.CITYCARD[b][4])-num(JH.CITYCARD[a][4]);});
+    else if(state.sort==='涨幅 ↑')names.sort(function(a,b){return num(JH.CITYCARD[a][4])-num(JH.CITYCARD[b][4]);});
+    else if(state.sort==='在售 ↓')names.sort(function(a,b){return cityActive(b)-cityActive(a);});
     var main=names.filter(function(n){return !VAC[n];}),vac=names.filter(function(n){return VAC[n];});
     var h='';
     if(main.length)h+='<div class="sec">大温城市 <span class="n">'+main.length+' 个</span></div><div class="gridN">'+main.map(card).join('')+'</div>';

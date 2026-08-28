@@ -4,7 +4,7 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827o"/>
+<link rel="stylesheet" href="style.css?v=20260827p"/>
 </head>
 <body>
 <div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
@@ -22,13 +22,13 @@
   <div class="foot">338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）</div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827o"></script>
-<script src="shared.js?v=20260827o"></script>
+<script src="data.js?v=20260827p"></script>
+<script src="shared.js?v=20260827p"></script>
 <script>
 (function(){
   var U=window.JHU;
   var state={q:U.param('q'),city:U.param('city')||'全部',zone:U.param('zone'),sort:'默认'};
-  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','在售 ↓'];
+  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','涨幅 ↑','在售 ↓'];
   function slug(z){return 'z-'+z.replace(/[^A-Za-z0-9]+/g,'-');}
   function card(nb){
     return '<div class="card ccard" onclick="JHU.open(&quot;nb&quot;,&quot;'+U.esc(nb[0])+'&quot;,&quot;'+U.esc(nb[1])+'&quot;)">'+U.img(U.cityImg(nb[1]),74)
@@ -57,6 +57,7 @@
     if(state.sort==='价格 ↓')items.sort(function(a,b){return b[2]-a[2];});
     else if(state.sort==='价格 ↑')items.sort(function(a,b){return a[2]-b[2];});
     else if(state.sort==='涨幅 ↓')items.sort(function(a,b){return b[3]-a[3];});
+    else if(state.sort==='涨幅 ↑')items.sort(function(a,b){return a[3]-b[3];});
     else if(state.sort==='在售 ↓')items.sort(function(a,b){return b[4]-a[4];});
     var h=items.length?('<div class="sec">'+(state.zone||'MLS 社区')+' <span class="n">'+items.length+' 个</span></div><div class="gridN">'+items.map(card).join('')+'</div>'):'';
     document.getElementById('body').innerHTML=h||'<div class="empty">没有匹配的社区，试试英文名或换个关键词</div>';
