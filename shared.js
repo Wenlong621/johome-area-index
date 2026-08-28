@@ -36,7 +36,7 @@ window.JHU=(function(){
     var a=histGet(kind);
     if(hidden||!a.length){el.innerHTML='';el.style.display='none';return;}
     el.style.display='block';
-    el.innerHTML=chipRow('🕘 历史搜索'+KLAB[kind],'<span class="nclr" id="histClr">清除</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
+    el.innerHTML=chipRow('🕘 历史搜索','<span class="nclr" id="histClr">清除</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
     bindChips(el);
     var b=el.querySelector('#histClr');if(b)b.onclick=function(){histClear(kind);if(onChange)onChange();};
   }
