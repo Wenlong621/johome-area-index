@@ -4,51 +4,66 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>生活圈索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827u"/>
+<link rel="stylesheet" href="style.css?v=20260828a"/>
 </head>
 <body>
-<div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
+<div class="cap" id="cap"></div>
 <div class="ph"><div class="scr"><div class="sb"><span>9:41</span><span class="ri">📶 🔋</span></div><div class="app">
-<div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">生活圈索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="hdr"><div class="bar" id="bar"><a class="bk" href="index.html">←</a><div class="ttl" id="ttl"></div><a class="aiBtn" id="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank"></a></div></div>
 <div class="wrap">
-  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索生活圈（如 铁道镇 / Metrotown / 学区）"/></div>
-  <div class="note"><b>生活圈</b>是介于「城市」与「MLS 社区」之间的中间层：将地理相邻、生活配套与通勤条件相近的若干 MLS 社区聚合为一个可比较的单元，边界依本地生活认知划定，可跨行政市界。<details><summary>划分口径与数据覆盖</summary><em>全域共 34 个，完整覆盖 GVR 与 FVREB 的 338 个 MLS 社区，每个社区唯一归属、无重叠无遗漏（例：Metrotown 生活圈同时包含 Burnaby South 与 Burnaby East 的社区）。市级范围过大、难以反映市内居住差异，单个 MLS 社区成交样本又偏小，生活圈是比较价格与生活方式更稳定的统计颗粒度。</em></details></div>
+  <div class="search"><span class="ic">🔍</span><input id="q"/></div>
+  <div class="note" id="note"></div>
   <div id="hist"></div>
   <div id="hot"></div>
   <div class="chips" id="cityChips"></div>
   <div class="chips" id="sort"></div>
   <div class="divider"></div>
   <div id="body"></div>
-  <div class="foot">生活圈 = 多个 MLS 社区聚合的本地人熟知区域 · 全大温 34 个、覆盖 338 个 MLS 社区（无重叠无遗漏）<br/>数据为原型示意 · 点击卡片进入生活圈详情页（AI 助手）</div>
+  <div class="foot" id="foot"></div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827u"></script>
-<script src="shared.js?v=20260827u"></script>
+<script src="i18n.js?v=20260828a"></script>
+<script src="data.js?v=20260828a"></script>
+<script src="shared.js?v=20260828a"></script>
 <script>
 (function(){
-  var U=window.JHU;
-  var state={q:'',city:U.param('city')||'全部',sort:'默认'};
-  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','涨幅 ↑','在售 ↓'];
+  var U=window.JHU,I=window.JHI,T=I.t;
+  document.documentElement.lang=I.LANG;
+  document.title=T('生活圈索引 · Johome 区域找房','Districts · Johome Area Finder');
+  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / District / Neighbourhood three-level index');
+  document.getElementById('ttl').textContent=T('生活圈索引','Districts');
+  document.getElementById('aiBtn').textContent=T('✦ AI 帮我选','✦ Ask AI');
+  document.getElementById('q').placeholder=T('搜索生活圈（如 铁道镇 / Metrotown / 学区）','Search districts (e.g. Metrotown, schools)');
+  document.getElementById('note').innerHTML=T(
+    '<b>生活圈</b>是介于「城市」与「MLS 社区」之间的中间层：将地理相邻、生活配套与通勤条件相近的若干 MLS 社区聚合为一个可比较的单元，边界依本地生活认知划定，可跨行政市界。<details><summary>划分口径与数据覆盖</summary><em>全域共 34 个，完整覆盖 GVR 与 FVREB 的 338 个 MLS 社区，每个社区唯一归属、无重叠无遗漏（例：Metrotown 生活圈同时包含 Burnaby South 与 Burnaby East 的社区）。市级范围过大、难以反映市内居住差异，单个 MLS 社区成交样本又偏小，生活圈是比较价格与生活方式更稳定的统计颗粒度。</em></details>',
+    'A <b>district</b> sits between a city and an MLS neighbourhood: adjacent neighbourhoods with comparable amenities and commute profiles are grouped into one unit, and boundaries follow how locals actually read the area — so a district can cross municipal lines.<details><summary>Boundaries and data coverage</summary><em>34 districts in total, covering all 338 MLS neighbourhoods across GVR and FVREB — each neighbourhood belongs to exactly one district, with no overlap or gap (the Metrotown district, for example, spans neighbourhoods in both Burnaby South and Burnaby East). A whole city is too coarse to show the differences within it, while a single MLS neighbourhood has too few sales to be stable; the district is the steadier unit for comparing prices and lifestyle.</em></details>');
+  document.getElementById('foot').innerHTML=T('生活圈 = 多个 MLS 社区聚合的本地人熟知区域 · 全大温 34 个、覆盖 338 个 MLS 社区（无重叠无遗漏）<br/>数据为原型示意 · 点击卡片进入生活圈详情页（AI 助手）','A district groups MLS neighbourhoods into an area locals recognise · 34 districts covering all 338 MLS neighbourhoods (no overlap, no gap)<br/>Prototype data for illustration · tap a card to open its district page in the AI assistant');
+  I.mountToggle(document.getElementById('bar'));
+  var SORTS=[[T('默认','Default'),'d'],[T('价格 ↓','Price ↓'),'pd'],[T('价格 ↑','Price ↑'),'pa'],[T('涨幅 ↓','Growth ↓'),'gd'],[T('涨幅 ↑','Growth ↑'),'ga'],[T('在售 ↓','Listings ↓'),'ad']];
+  var state={q:'',city:U.param('city')||'全部',sort:'d'};
   function card(zn){
     var z=JH.ZONES[zn],s=JH.ZSTATS[zn];
-    return U.bigCard({k:'zone',n:zn,c:'',img:U.cityImg(z.prim),sub:z.cities.join(' / '),kind:'生活圈',
-      tg:(z.tags||[]).slice(0,3).join(' · '),m1v:'$'+s.med+'万',m1l:'售出中位价',
-      m2v:s.active+'套',m2l:'在售套数',gain:'+'+s.gain+'%'});
+    return U.bigCard({k:'zone',n:zn,c:'',img:U.cityImg(z.prim),sub:z.cities.join(' / '),kind:T('生活圈','District'),
+      tg:I.tags((z.tags||[]).slice(0,3)).join(' · '),m1v:I.money(s.med),m1l:T('售出中位价','Median sold'),
+      m2v:s.active+T(' 套',''),m2l:T('在售套数','Active listings'),gain:'+'+s.gain+'%'});
   }
   function paint(){
     try{U.histRow(document.getElementById('hist'),'zone',!!state.q,paint);U.hotNames(document.getElementById('hot'),'zone',!!state.q);}catch(e){}
     var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
-    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+(p==='全部'?'全部城市':p)+'</span>';}).join('');
+    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+(p==='全部'?T('全部城市','All cities'):p)+'</span>';}).join('');
     Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');paint();};});
-    var s=document.getElementById('sort');s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
+    var s=document.getElementById('sort');
+    s.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x[1]?' on':'')+'" data-s="'+x[1]+'">'+x[0]+'</span>';}).join('');
     Array.prototype.forEach.call(s.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});
-    var zs=U.zonesOfCity(state.city).filter(function(zn){var q=state.q.toLowerCase();if(!q)return true;var z=JH.ZONES[zn];return (zn+' '+(z.alias||'')+' '+z.cities.join(' ')+' '+(z.tags||[]).join(' ')+' '+z.anchor).toLowerCase().indexOf(q)>=0;});
-    if(state.sort==='价格 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].med-JH.ZSTATS[a].med;});
-    else if(state.sort==='价格 ↑')zs.sort(function(a,b){return JH.ZSTATS[a].med-JH.ZSTATS[b].med;});
-    else if(state.sort==='涨幅 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].gain-JH.ZSTATS[a].gain;});
-    else if(state.sort==='涨幅 ↑')zs.sort(function(a,b){return JH.ZSTATS[a].gain-JH.ZSTATS[b].gain;});
-    else if(state.sort==='在售 ↓')zs.sort(function(a,b){return JH.ZSTATS[b].active-JH.ZSTATS[a].active;});
-    document.getElementById('body').innerHTML=zs.length?('<div class="sec">生活圈 <span class="n">'+zs.length+' 个</span></div><div class="gridN">'+zs.map(card).join('')+'</div>'):'<div class="empty">没有匹配的生活圈，试试中文别名（如「铁道镇」）</div>';U.bindCards(document.getElementById('body'));
+    var zs=U.zonesOfCity(state.city).filter(function(zn){var q=state.q.toLowerCase();if(!q)return true;var z=JH.ZONES[zn];
+      return (zn+' '+(z.alias||'')+' '+z.cities.join(' ')+' '+(z.tags||[]).join(' ')+' '+I.tags(z.tags||[]).join(' ')+' '+z.anchor).toLowerCase().indexOf(q)>=0;});
+    if(state.sort==='pd')zs.sort(function(a,b){return JH.ZSTATS[b].med-JH.ZSTATS[a].med;});
+    else if(state.sort==='pa')zs.sort(function(a,b){return JH.ZSTATS[a].med-JH.ZSTATS[b].med;});
+    else if(state.sort==='gd')zs.sort(function(a,b){return JH.ZSTATS[b].gain-JH.ZSTATS[a].gain;});
+    else if(state.sort==='ga')zs.sort(function(a,b){return JH.ZSTATS[a].gain-JH.ZSTATS[b].gain;});
+    else if(state.sort==='ad')zs.sort(function(a,b){return JH.ZSTATS[b].active-JH.ZSTATS[a].active;});
+    document.getElementById('body').innerHTML=zs.length?('<div class="sec">'+T('生活圈','Districts')+' <span class="n">'+zs.length+T(' 个','')+'</span></div><div class="gridN">'+zs.map(card).join('')+'</div>'):('<div class="empty">'+T('没有匹配的生活圈，试试中文别名（如「铁道镇」）','No matching districts — try another keyword')+'</div>');
+    U.bindCards(document.getElementById('body'));
   }
   document.getElementById('q').oninput=function(){state.q=this.value.trim();paint();};
   paint();

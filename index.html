@@ -4,46 +4,62 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>Johome 区域找房 · 大温及周边</title>
-<link rel="stylesheet" href="style.css?v=20260827u"/>
+<link rel="stylesheet" href="style.css?v=20260828a"/>
 </head>
 <body>
-<div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
+<div class="cap" id="cap"></div>
 <div class="ph"><div class="scr"><div class="sb"><span>9:41</span><span class="ri">📶 🔋</span></div><div class="app">
-<div class="hdr"><div class="bar"><div class="logo">JOHOME</div><div class="ttl" style="font-weight:400;font-size:13px;opacity:.9">区域找房 · 大温及周边</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="hdr"><div class="bar" id="bar"><div class="logo">JOHOME</div><div class="ttl" id="ttl" style="font-weight:400;font-size:13px;opacity:.9"></div><a class="aiBtn" id="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank"></a></div></div>
 <div class="wrap">
-  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索城市 / 生活圈 / 社区（回车跳转）"/></div>
+  <div class="search"><span class="ic">🔍</span><input id="q"/></div>
   <div id="entries"></div>
-  <div class="sec">热门城市</div>
-  <div class="grid" id="hotCities"></div>
-  <div class="sec">热门生活圈</div>
+  <div class="sec" id="secCities"></div>
+  <div class="gridN" id="hotCities"></div>
+  <div class="sec" id="secZones"></div>
   <div class="chips" id="hotZones" style="flex-wrap:wrap"></div>
-  <div class="cta" onclick="window.open(JHU.PROTO,'_blank')"><div style="font-size:22px">✦</div><div style="flex:1"><b>不知道从哪开始？让 AI 帮你选</b><p>买房 · 选区 · 投资，多轮问诊帮你把需求想清楚</p></div><span style="font-size:16px">›</span></div>
-  <div class="foot">城市 → 生活圈 → MLS 社区 三级索引 · 数据为原型示意（与 Buying AI 原型同源同口径）<br/>图片来自 Wikimedia Commons</div>
+  <div class="cta" id="cta"></div>
+  <div class="foot" id="foot"></div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827u"></script>
-<script src="shared.js?v=20260827u"></script>
+<script src="i18n.js?v=20260828a"></script>
+<script src="data.js?v=20260828a"></script>
+<script src="shared.js?v=20260828a"></script>
 <script>
 (function(){
-  var U=window.JHU;
+  var U=window.JHU,I=window.JHI,T=I.t;
+  document.documentElement.lang=I.LANG;
+  document.title=T('Johome 区域找房 · 大温及周边','Johome Area Finder · Metro Vancouver & beyond');
+  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / District / Neighbourhood three-level index');
+  document.getElementById('ttl').textContent=T('区域找房 · 大温及周边','Area finder · Metro Vancouver');
+  document.getElementById('aiBtn').textContent=T('✦ AI 帮我选','✦ Ask AI');
+  document.getElementById('q').placeholder=T('搜索城市 / 生活圈 / 社区（回车跳转）','Search city / district / neighbourhood (press Enter)');
+  document.getElementById('secCities').textContent=T('热门城市','Popular cities');
+  document.getElementById('secZones').textContent=T('热门生活圈','Popular districts');
+  document.getElementById('foot').innerHTML=T('城市 → 生活圈 → MLS 社区 三级索引 · 数据为原型示意（与 Buying AI 原型同源同口径）<br/>图片来自 Wikimedia Commons','City → District → MLS neighbourhood · prototype data for illustration (same source and definitions as the Buying AI prototype)<br/>Images from Wikimedia Commons');
+  document.getElementById('cta').innerHTML='<div style="font-size:22px">✦</div><div style="flex:1"><b>'+T('不知道从哪开始？让 AI 帮你选','Not sure where to start? Let AI help')+'</b><p>'+T('买房 · 选区 · 投资，多轮问诊帮你把需求想清楚','Buying, choosing an area, investing — a guided chat to clarify what you need')+'</p></div><span style="font-size:16px">›</span>';
+  document.getElementById('cta').onclick=function(){window.open(U.PROTO,'_blank');};
+  I.mountToggle(document.getElementById('bar'));
   var nbTot=0,zTot=0,k;for(k in JH.ZONES){zTot++;nbTot+=JH.ZONES[k].nbs.length;}
   var cTot=Object.keys(JH.CITYCARD).length;
-  var E=[['cities.html','🏙️','城市','按行政市浏览：售出中位价、涨幅与城市定位',cTot],
-         ['zones.html','🗺️','生活圈','本地人熟知的认知型区域，多个 MLS 社区聚合、可跨市',zTot],
-         ['communities.html','🏘️','MLS 社区','最细颗粒度：按生活圈分组的全部挂盘社区',nbTot]];
+  var E=[['cities.html','🏙️',T('城市','Cities'),T('按行政市浏览：售出中位价、涨幅与城市定位','Browse by municipality: median sold price, growth and positioning'),cTot],
+         ['zones.html','🗺️',T('生活圈','Districts'),T('本地人熟知的认知型区域，多个 MLS 社区聚合、可跨市','Areas locals recognise — groups of MLS neighbourhoods, can cross city lines'),zTot],
+         ['communities.html','🏘️',T('MLS 社区','MLS neighbourhoods'),T('最细颗粒度：按生活圈分组的全部挂盘社区','Finest level: every listed neighbourhood, grouped by district'),nbTot]];
   document.getElementById('entries').innerHTML=E.map(function(e){
     return '<div class="entry" onclick="location.href=&quot;'+e[0]+'&quot;"><div class="ei">'+e[1]+'</div><div class="et"><b>'+e[2]+'</b><p>'+e[3]+'</p></div><div class="en">'+e[4]+'</div><span class="ar">›</span></div>';
   }).join('');
   var HOT=['Burnaby','Richmond','Surrey','Coquitlam'];
-  document.getElementById('hotCities').innerHTML=HOT.map(function(n){
+  document.getElementById('hotCities').innerHTML=HOT.filter(function(n){return JH.CITYCARD[n];}).map(function(n){
     var a=JH.CITYCARD[n];
-    return '<div class="card" onclick="JHU.open(&quot;city&quot;,&quot;'+n+'&quot;)">'+U.img(U.cityImg(n),80)+'<div class="cb"><div class="nm">'+n+'</div><div class="stats"><span class="v">'+a[2]+'</span><span class="g">'+a[4]+'</span></div></div></div>';
+    return U.bigCard({k:'city',n:n,c:'',img:U.cityImg(n),sub:'',kind:T('城市','City'),tg:I.ctag(a[1]),
+      m1v:I.money(a[2]),m1l:T('售出中位价','Median sold'),m2v:'',m2l:'',gain:a[4]});
   }).join('');
+  U.bindCards(document.getElementById('hotCities'));
   var HZ=['Metrotown','Brentwood','Downtown','Kitsilano','Surrey Central','Coquitlam Centre','South Surrey / White Rock','Kerrisdale / Dunbar','Richmond Centre (Brighouse)','Steveston'];
   document.getElementById('hotZones').innerHTML=HZ.filter(function(z){return JH.ZONES[z];}).map(function(z){
     var al=(JH.ZONES[z].alias||'').split('/')[0];
-    return '<span class="chip" onclick="JHU.open(&quot;zone&quot;,&quot;'+U.esc(z)+'&quot;)">'+z+(al&&al!==z?' · '+al:'')+'</span>';
+    return '<span class="chip" data-z="'+U.esc(z)+'">'+z+(!I.EN&&al&&al!==z?' · '+al:'')+'</span>';
   }).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('#hotZones .chip'),function(el){el.onclick=function(){U.open('zone',el.getAttribute('data-z'),'');};});
   document.getElementById('q').onkeydown=function(e){if(e.key==='Enter'&&this.value.trim())location.href='communities.html?q='+encodeURIComponent(this.value.trim());};
 })();
 </script>

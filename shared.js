@@ -14,7 +14,8 @@ window.JHU=(function(){
   var HOTC=['Burnaby','Richmond','Vancouver West','Surrey','Coquitlam','West Vancouver'];
   var HOTZ=['Metrotown','Brentwood','Downtown','Kitsilano','Surrey Central','Coquitlam Centre','Kerrisdale / Dunbar','Richmond Centre (Brighouse)'];
   function hotNbs(){return HOTZ.filter(function(z){return JH.ZONES[z];}).map(function(z){return JH.ZONES[z].nbs[0];});}
-  var KLAB={city:'城市',zone:'生活圈',nb:'社区'};
+  var T=window.JHI.t;
+  var KLAB={city:T('城市','cities'),zone:T('生活圈','districts'),nb:T('社区','neighbourhoods')};
   function bindChips(el){Array.prototype.forEach.call(el.querySelectorAll('.nchip[data-n]'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});}
   function chipRow(title,extra,items){
     return '<div class="nrow"><div class="nlab">'+title+extra+'</div><div class="nchips">'+items.map(function(it){
@@ -29,15 +30,15 @@ window.JHU=(function(){
   function hotNames(el,kind,hidden){
     if(hidden){el.innerHTML='';el.style.display='none';return;}
     el.style.display='block';
-    el.innerHTML=chipRow('🔥 热门'+KLAB[kind],'',hotItems(kind));
+    el.innerHTML=chipRow(T('热门'+KLAB[kind],'Popular '+KLAB[kind]),'',hotItems(kind));
     bindChips(el);
   }
   function histRow(el,kind,hidden,onChange){
     var a=histGet(kind);
     if(hidden){el.innerHTML='';el.style.display='none';return;}
     el.style.display='block';
-    if(!a.length){el.innerHTML='<div class="nrow"><div class="nlab">🕘 历史搜索</div><div class="hint">你点开过的'+KLAB[kind]+'会记录在这里，方便下次快速回到</div></div>';return;}
-    el.innerHTML=chipRow('🕘 历史搜索','<span class="nclr" id="histClr">清除</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
+    if(!a.length){el.innerHTML='<div class="nrow"><div class="nlab">'+T('历史搜索','Recently viewed')+'</div><div class="hint">'+T('你点开过的'+KLAB[kind]+'会记录在这里，方便下次快速回到','The '+KLAB[kind]+' you open show up here for quick access')+'</div></div>';return;}
+    el.innerHTML=chipRow(T('历史搜索','Recently viewed'),'<span class="nclr" id="histClr">'+T('清除','Clear')+'</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
     bindChips(el);
     var b=el.querySelector('#histClr');if(b)b.onclick=function(){histClear(kind);if(onChange)onChange();};
   }
@@ -50,7 +51,7 @@ window.JHU=(function(){
       +(o.tg?'<div class="tg">'+o.tg+'</div>':'')
       +'<div class="mets"><div class="met"><div class="v">'+o.m1v+'</div><div class="l">'+o.m1l+'</div></div>'
       +'<div class="met"><div class="v">'+o.m2v+'</div><div class="l">'+o.m2l+'</div></div></div>'
-      +'<div class="gain">近一年 <b>'+o.gain+'</b></div></div></div>';
+      +'<div class="gain">'+T('近一年','Past 12 mo')+' <b>'+o.gain+'</b></div></div></div>';
   }
   function bindCards(el){Array.prototype.forEach.call(el.querySelectorAll('.bcard[data-n]'),function(c){c.onclick=function(){open(c.getAttribute('data-k'),c.getAttribute('data-n'),c.getAttribute('data-c'));};});}
   return {PROTO:PROTO,open:open,param:param,primList:primList,zonesOfCity:zonesOfCity,cityImg:cityImg,bigCard:bigCard,bindCards:bindCards,esc:esc,img:img,HOTC:HOTC,HOTZ:HOTZ,hotNbs:hotNbs,hotNames:hotNames,histRow:histRow,histGet:histGet,histPush:histPush,histClear:histClear};

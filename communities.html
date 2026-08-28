@@ -4,14 +4,14 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <title>社区索引 · Johome 区域找房</title>
-<link rel="stylesheet" href="style.css?v=20260827u"/>
+<link rel="stylesheet" href="style.css?v=20260828a"/>
 </head>
 <body>
-<div class="cap"><b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引</div>
+<div class="cap" id="cap"></div>
 <div class="ph"><div class="scr"><div class="sb"><span>9:41</span><span class="ri">📶 🔋</span></div><div class="app">
-<div class="hdr"><div class="bar"><a class="bk" href="index.html">←</a><div class="ttl">MLS 社区索引</div><a class="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank">✦ AI 帮我选</a></div></div>
+<div class="hdr"><div class="bar" id="bar"><a class="bk" href="index.html">←</a><div class="ttl" id="ttl"></div><a class="aiBtn" id="aiBtn" href="https://wenlong621.github.io/johome-ai-prototype/" target="_blank"></a></div></div>
 <div class="wrap">
-  <div class="search"><span class="ic">🔍</span><input id="q" placeholder="搜索社区（如 Kitsilano / Metrotown）"/></div>
+  <div class="search"><span class="ic">🔍</span><input id="q"/></div>
   <div id="hist"></div>
   <div id="hot"></div>
   <div class="chips" id="cityChips"></div>
@@ -19,26 +19,35 @@
   <div class="chips" id="sort"></div>
   <div class="divider"></div>
   <div id="body"></div>
-  <div class="foot">338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）</div>
+  <div class="foot" id="foot"></div>
 </div>
 </div></div></div>
-<script src="data.js?v=20260827u"></script>
-<script src="shared.js?v=20260827u"></script>
+<script src="i18n.js?v=20260828a"></script>
+<script src="data.js?v=20260828a"></script>
+<script src="shared.js?v=20260828a"></script>
 <script>
 (function(){
-  var U=window.JHU;
-  var state={q:U.param('q'),city:U.param('city')||'全部',zone:U.param('zone'),sort:'默认'};
-  var SORTS=['默认','价格 ↓','价格 ↑','涨幅 ↓','涨幅 ↑','在售 ↓'];
-  function slug(z){return 'z-'+z.replace(/[^A-Za-z0-9]+/g,'-');}
+  var U=window.JHU,I=window.JHI,T=I.t;
+  document.documentElement.lang=I.LANG;
+  document.title=T('社区索引 · Johome 区域找房','Neighbourhoods · Johome Area Finder');
+  document.getElementById('cap').innerHTML=T('<b>⛳ Johome 区域找房 · 索引原型</b>手机端 · 城市 / 生活圈 / 社区 三级列表索引','<b>⛳ Johome Area Finder · index prototype</b>Mobile · City / District / Neighbourhood three-level index');
+  document.getElementById('ttl').textContent=T('MLS 社区索引','MLS neighbourhoods');
+  document.getElementById('aiBtn').textContent=T('✦ AI 帮我选','✦ Ask AI');
+  document.getElementById('q').placeholder=T('搜索社区（如 Kitsilano / Metrotown）','Search neighbourhoods (e.g. Kitsilano)');
+  document.getElementById('foot').innerHTML=T('338 个 MLS 社区 · 按生活圈分组（GVR + FVREB 官方 Subarea 对照，每社区唯一归属）<br/>数据为原型示意 · 点击社区进入社区详情页（AI 助手）','338 MLS neighbourhoods · grouped by district (GVR + FVREB official sub-area mapping, one district each)<br/>Prototype data for illustration · tap a neighbourhood to open its page in the AI assistant');
+  I.mountToggle(document.getElementById('bar'));
+  var SORTS=[[T('默认','Default'),'d'],[T('价格 ↓','Price ↓'),'pd'],[T('价格 ↑','Price ↑'),'pa'],[T('涨幅 ↓','Growth ↓'),'gd'],[T('涨幅 ↑','Growth ↑'),'ga'],[T('在售 ↓','Listings ↓'),'ad']];
+  var state={q:U.param('q'),city:U.param('city')||'全部',zone:U.param('zone'),sort:'d'};
   function card(nb){
-    var z=JH.ZONES[nb[5]]||{},tg=(z.tags||[]).slice(0,3).join(' · ');
-    return U.bigCard({k:'nb',n:nb[0],c:nb[1],img:U.cityImg(nb[1]),sub:nb[1],kind:'社区',tg:tg,
-      m1v:'$'+nb[2]+'万',m1l:'售出中位价',m2v:nb[4]+'套',m2l:'在售套数',gain:'+'+nb[3]+'%'});
+    var z=JH.ZONES[nb[5]]||{};
+    return U.bigCard({k:'nb',n:nb[0],c:nb[1],img:U.cityImg(nb[1]),sub:nb[1],kind:T('社区','Neighbourhood'),
+      tg:I.tags((z.tags||[]).slice(0,3)).join(' · '),m1v:I.money(nb[2]),m1l:T('售出中位价','Median sold'),
+      m2v:nb[4]+T(' 套',''),m2l:T('在售套数','Active listings'),gain:'+'+nb[3]+'%'});
   }
   function paint(){
     try{U.histRow(document.getElementById('hist'),'nb',!!state.q,paint);U.hotNames(document.getElementById('hot'),'nb',!!state.q);}catch(e){}
     var prims=['全部'].concat(U.primList()),cc=document.getElementById('cityChips');
-    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+(p==='全部'?'全部城市':p)+'</span>';}).join('');
+    cc.innerHTML=prims.map(function(p){return '<span class="chip'+(state.city===p?' on':'')+'" data-c="'+U.esc(p)+'">'+(p==='全部'?T('全部城市','All cities'):p)+'</span>';}).join('');
     Array.prototype.forEach.call(cc.querySelectorAll('.chip'),function(el){el.onclick=function(){state.city=el.getAttribute('data-c');state.zone='';paint();};});
     var q=state.q.toLowerCase(),all=U.zonesOfCity(state.city),zs=all,items=[];
     if(state.zone&&JH.ZONES[state.zone])zs=[state.zone];
@@ -46,20 +55,21 @@
       JH.ZONES[zn].nbs.forEach(function(nb){if(!q||(nb[0]+' '+nb[1]).toLowerCase().indexOf(q)>=0)items.push([nb[0],nb[1],nb[2],nb[3],nb[4],zn]);});
     });
     var jw=document.getElementById('jump');
-    jw.innerHTML=q?'':['<a data-z="" class="'+(state.zone?'':'on')+'">全部生活圈</a>'].concat(all.map(function(zn){
+    jw.innerHTML=q?'':['<a data-z="" class="'+(state.zone?'':'on')+'">'+T('全部生活圈','All districts')+'</a>'].concat(all.map(function(zn){
       return '<a data-z="'+U.esc(zn)+'" class="'+(state.zone===zn?'on':'')+'">'+zn+'</a>';
     })).join('');
     Array.prototype.forEach.call(jw.querySelectorAll('a[data-z]'),function(el){el.onclick=function(){state.zone=el.getAttribute('data-z');paint();};});
     var so=document.getElementById('sort');
-    so.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x?' on':'')+'" data-s="'+x+'">'+x+'</span>';}).join('');
+    so.innerHTML=SORTS.map(function(x){return '<span class="chip'+(state.sort===x[1]?' on':'')+'" data-s="'+x[1]+'">'+x[0]+'</span>';}).join('');
     Array.prototype.forEach.call(so.querySelectorAll('.chip'),function(el){el.onclick=function(){state.sort=el.getAttribute('data-s');paint();};});
-    if(state.sort==='价格 ↓')items.sort(function(a,b){return b[2]-a[2];});
-    else if(state.sort==='价格 ↑')items.sort(function(a,b){return a[2]-b[2];});
-    else if(state.sort==='涨幅 ↓')items.sort(function(a,b){return b[3]-a[3];});
-    else if(state.sort==='涨幅 ↑')items.sort(function(a,b){return a[3]-b[3];});
-    else if(state.sort==='在售 ↓')items.sort(function(a,b){return b[4]-a[4];});
-    var h=items.length?('<div class="sec">'+(state.zone||'MLS 社区')+' <span class="n">'+items.length+' 个</span></div><div class="gridN">'+items.map(card).join('')+'</div>'):'';
-    document.getElementById('body').innerHTML=h||'<div class="empty">没有匹配的社区，试试英文名或换个关键词</div>';U.bindCards(document.getElementById('body'));
+    if(state.sort==='pd')items.sort(function(a,b){return b[2]-a[2];});
+    else if(state.sort==='pa')items.sort(function(a,b){return a[2]-b[2];});
+    else if(state.sort==='gd')items.sort(function(a,b){return b[3]-a[3];});
+    else if(state.sort==='ga')items.sort(function(a,b){return a[3]-b[3];});
+    else if(state.sort==='ad')items.sort(function(a,b){return b[4]-a[4];});
+    var h=items.length?('<div class="sec">'+(state.zone||T('MLS 社区','MLS neighbourhoods'))+' <span class="n">'+items.length+T(' 个','')+'</span></div><div class="gridN">'+items.map(card).join('')+'</div>'):'';
+    document.getElementById('body').innerHTML=h||'<div class="empty">'+T('没有匹配的社区，试试英文名或换个关键词','No matching neighbourhoods — try another keyword')+'</div>';
+    U.bindCards(document.getElementById('body'));
     var qEl=document.getElementById('q');if(qEl.value!==state.q)qEl.value=state.q;
   }
   document.getElementById('q').oninput=function(){state.q=this.value.trim();paint();};
