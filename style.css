@@ -72,7 +72,11 @@ a{text-decoration:none;color:inherit}
 .ccard .al{font-size:10.5px}
 .ccard .stats{margin-top:1px}
 .ccard .stats .v{font-size:12.5px}
-.ccard .sub a{cursor:default;background:#F1F4F9;color:#5A6678}
+.ccard .sub a{cursor:default;background:#F1F4F9;color:#5A6678;font-size:10px;padding:2px 7px}
+.ccard .tg{font-size:10.5px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ccard .tags span{font-size:9.5px;padding:2px 6px}
+.ccard .stats{flex-wrap:wrap;gap:5px}
+.ccard .stats .m{font-size:9.5px;width:100%}
 .zhead{display:flex;align-items:center;gap:8px;background:#fff;border-radius:11px;padding:10px 12px;margin:14px 0 7px;box-shadow:0 1px 3px rgba(20,40,80,.06);cursor:pointer}
 .zhead .zn{font-size:13.5px;font-weight:700;flex:1}
 .zhead .zn small{font-weight:400;color:#7A8699;font-size:11px;margin-left:5px}
