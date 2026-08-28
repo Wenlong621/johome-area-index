@@ -2,8 +2,9 @@ window.JHU=(function(){
   var PROTO='https://wenlong621.github.io/johome-ai-prototype/';
   function histKey(k){return 'jh_hist_'+k;}
   function histGet(k){try{var a=JSON.parse(localStorage.getItem(histKey(k))||'[]');return (a instanceof Array)?a:[];}catch(e){return [];}}
-  function histPush(k,n,c){try{var a=histGet(k).filter(function(x){return x&&x.n!==n;});a.unshift({n:n,c:c||''});localStorage.setItem(histKey(k),JSON.stringify(a.slice(0,10)));}catch(e){}}
-  function histClear(k){try{localStorage.removeItem(histKey(k));}catch(e){}}
+  function histPush(k,n,c){try{var a=histGet(k).filter(function(x){return x&&x.n!==n;});a.unshift({n:n,c:c||''});localStorage.setItem(histKey(k),JSON.stringify(a.slice(0,10)));localStorage.removeItem(histKey(k)+'_x');}catch(e){}}
+  function histClear(k){try{localStorage.removeItem(histKey(k));localStorage.setItem(histKey(k)+'_x','1');}catch(e){}}
+  function histCleared(k){try{return localStorage.getItem(histKey(k)+'_x')==='1';}catch(e){return false;}}
   function open(kind,name,city){histPush(kind,name,city);var u=PROTO+'?open='+encodeURIComponent(kind+':'+name+(city?(':'+city):''));window.open(u,'_blank');}
   function param(k){var m=location.search.match(new RegExp('[?&]'+k+'=([^&]+)'));return m?decodeURIComponent(m[1].replace(/\+/g,' ')):'';}
   function primList(){var seen={},r=[],k;for(k in JH.ZONES){var p=JH.ZONES[k].prim;if(!seen[p]){seen[p]=1;r.push(p);}}return r;}
@@ -37,6 +38,7 @@ window.JHU=(function(){
     var a=histGet(kind);
     if(hidden){el.innerHTML='';el.style.display='none';return;}
     el.style.display='block';
+    if(!a.length&&histCleared(kind)){el.innerHTML='';el.style.display='none';return;}
     if(!a.length){el.innerHTML='<div class="nrow"><div class="nlab">'+T('历史搜索','Recently viewed')+'</div><div class="hint">'+T('你点开过的'+KLAB[kind]+'会记录在这里，方便下次快速回到','The '+KLAB[kind]+' you open show up here for quick access')+'</div></div>';return;}
     el.innerHTML=chipRow(T('历史搜索','Recently viewed'),'<span class="nclr" id="histClr">'+T('清除','Clear')+'</span>',a.map(function(x){return {k:kind,n:x.n,c:x.c};}));
     bindChips(el);
