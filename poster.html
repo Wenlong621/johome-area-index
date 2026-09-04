@@ -35,17 +35,12 @@ h2{font-size:22px;font-weight:800;margin-top:8px;line-height:1.3}
 .pt .ic{font-size:18px;line-height:1;margin-bottom:8px}
 .pt b{display:block;font-size:13px;line-height:1.35;margin-bottom:4px}
 .pt p{font-size:11px;line-height:1.55;color:var(--mute)}
-.lvls{display:flex;gap:8px;margin-top:12px}
-.lv{flex:1;border:1px solid var(--cardb);background:var(--card);border-radius:12px;padding:11px 12px;position:relative}
-.lv.on{border-color:var(--acc);box-shadow:0 0 0 2px rgba(255,210,74,.14)}
-.poster.light .lv.on{box-shadow:0 0 0 2px rgba(30,99,222,.14)}
-.lv b{display:block;font-size:26px;font-weight:800;line-height:1;letter-spacing:-.5px}
-.lv b small{font-size:11px;font-weight:600;margin-left:3px;letter-spacing:0;color:var(--mute)}
-.lv i{display:block;font-style:normal;font-size:13px;font-weight:600;margin-top:6px}
-.lv p{font-size:10.5px;line-height:1.5;color:var(--mute);margin-top:3px}
-.lv .step{position:absolute;top:9px;right:11px;font-size:10px;color:var(--mute);letter-spacing:1px}
-.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
-.chips span{border:1px solid var(--cardb);background:var(--card);border-radius:99px;padding:5px 11px;font-size:11px;color:var(--fg)}
+.vals{margin-top:6px}
+.val{display:flex;gap:14px;align-items:flex-start;padding:13px 0;border-bottom:1px solid var(--line)}
+.val:last-child{border-bottom:0;padding-bottom:0}
+.val .n{flex:none;width:30px;font-size:22px;font-weight:800;line-height:1;color:var(--acc);letter-spacing:-.5px;margin-top:1px}
+.val b{display:block;font-size:14.5px;font-weight:700;line-height:1.3}
+.val p{font-size:11.5px;line-height:1.6;color:var(--mute);margin-top:4px}
 .cta{margin-top:auto;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
 .cta .l b{display:block;font-size:15px;font-weight:700}
 .cta .l span{font-size:11.5px;color:var(--mute);display:block;margin-top:3px}
@@ -80,7 +75,7 @@ html[lang=en] .lv i{font-size:12px}
     zh:{
       nw:'新功能上线',eyebrow:'JOHOME · 区域找房',
       h1:['不知道住哪？','先看懂<em>那一片</em>'],
-      lead:'新上线的<b>区域找房</b>，把大温拆成 城市 → 生活圈 → 社区 三层。就算对这座城市一无所知，也能从大到小，一层层找到适合自己的那一片。',
+      lead:'新上线的<b>区域找房</b>：不用先知道任何地名，也能从整个大温出发，把范围一步步缩到适合自己的那一片。',
       artA:'一个生活圈',artB:'市界穿过也不切开',
       k1:'新概念',h2a:'生活圈：本地人真正在用的地图',
       pts:[
@@ -88,18 +83,19 @@ html[lang=en] .lv i{font-size:12px}
         ['🔗','跨市也算一片','Metrotown 生活圈覆盖 '+mCities+' 的 '+mCnt+' 个社区。生活范围在哪，圈就画到哪。'],
         ['📊','比城市细，比社区稳','一个市的均价掩盖了内部差异；单个社区成交又太少。生活圈的价格与涨幅，看得懂、也靠得住。']
       ],
-      k2:'怎么用',h2b:'三层索引，一层层收窄',
-      lv:[[cTot,'座','城市','先定落脚哪个市：中位价、涨幅、城市定位一眼对比','01'],
-          [zTot,'个','生活圈','再挑本地人认的那一片：跨市、可比、有行情','02'],
-          [nbTot,'个','MLS 社区','最后下钻到社区与房源，一步进详情','03']],
-      chips:['中英文搜索','按城市 / 生活圈筛选','价格 · 涨幅 · 在售排序','热门与历史快捷入口','一键进 AI 帮我选'],
+      k2:'对你意味着什么',h2b:'少走弯路，选对那一片',
+      vals:[
+        ['零基础也能开始','刚来大温、对城市一无所知？从大范围看起，一步步收窄，不用先背地名，也不会漏掉本地人才知道的好地方。'],
+        ['比价不再被均价带偏','同一个市里，湖边独立屋和天车口高层完全是两个价。按生活圈看价格和涨幅，对应的是真实的生活范围，而不是一个笼统的行政均值。'],
+        ['先选区，再选房','先锁定适合自己的那一片，再进去看房源。方向对了，就不用一套套无效看房，把时间花在真正值得比较的选项上。']
+      ],
       ctaB:'立即体验 · 区域找房',ctaS:'johome.com · 城市 / 生活圈 / 社区',go:'去看看 →',
       dis:'数据覆盖 GVR + FVREB 官方 MLS 社区对照，'+nbTot+' 个社区唯一归属、无重叠无遗漏 · 页面数据为示意，历史涨幅不代表未来表现，以官方最新数据为准'
     },
     en:{
       nw:'NEW',eyebrow:'JOHOME · AREA FINDER',
       h1:['Not sure where to live?','Start with <em>the area</em>'],
-      lead:'The new <b>Area Finder</b> breaks Metro Vancouver into three levels — City → Lifestyle zone → Neighbourhood — so you can narrow down from big to small, even if the city is new to you.',
+      lead:'The new <b>Area Finder</b>: start from all of Metro Vancouver and narrow down, step by step, to the area that fits you — no place names required.',
       artA:'one lifestyle zone',artB:'city lines don’t cut it',
       k1:'THE IDEA',h2a:'Lifestyle zones: the map locals actually use',
       pts:[
@@ -107,11 +103,12 @@ html[lang=en] .lv i{font-size:12px}
         ['🔗','One zone, across cities','The Metrotown zone spans '+mCnt+' neighbourhoods in '+mCities+'. Where life extends, the zone follows.'],
         ['📊','Finer than a city, steadier than a block','A city average hides its own contrasts; one neighbourhood has too few sales. Zone prices and growth are readable and reliable.']
       ],
-      k2:'HOW IT WORKS',h2b:'Three levels, narrowing step by step',
-      lv:[[cTot,'','Cities','Pick the municipality: median price, growth and positioning at a glance','01'],
-          [zTot,'','Lifestyle zones','Choose the area locals recognise — comparable, with market data','02'],
-          [nbTot,'','Neighbourhoods','Drill down to the block and its listings in one tap','03']],
-      chips:['Bilingual search','Filter by city / zone','Sort by price · growth · listings','Popular & recent shortcuts','Ask AI in one tap'],
+      k2:'WHAT IT MEANS FOR YOU',h2b:'Fewer detours, the right area',
+      vals:[
+        ['Start with zero local knowledge','New to Metro Vancouver? Begin broad and narrow step by step — no place names to memorise, and no missing the spots only locals know.'],
+        ['Prices that mean something','Within one city a lakeside house and a tower by the SkyTrain are worlds apart. Zone-level prices and growth track a real living area, not an administrative average.'],
+        ['Pick the area before the home','Lock in the right area first, then look at listings. With the direction set, you skip the wasted viewings and compare only what matters.']
+      ],
       ctaB:'Try the Area Finder',ctaS:'johome.com · City / Zone / Neighbourhood',go:'Open →',
       dis:'Built on the official GVR + FVREB MLS sub-area mapping — '+nbTot+' neighbourhoods, one zone each, no overlap or gap · Illustrative data; past growth does not indicate future results'
     }
@@ -145,9 +142,8 @@ html[lang=en] .lv i{font-size:12px}
       +'<div class="art">'+art(d,ACC[variant])+'</div>'
       +'<div class="sec"><div class="kick">'+d.k1+'</div><h2>'+d.h2a+'</h2><div class="pts">'
       +d.pts.map(function(x){return '<div class="pt"><div class="ic">'+x[0]+'</div><b>'+x[1]+'</b><p>'+x[2]+'</p></div>';}).join('')+'</div></div>'
-      +'<div class="sec"><div class="kick">'+d.k2+'</div><h2>'+d.h2b+'</h2><div class="lvls">'
-      +d.lv.map(function(x,i){return '<div class="lv'+(i===1?' on':'')+'"><span class="step">'+x[4]+'</span><b>'+x[0]+'<small>'+x[1]+'</small></b><i>'+x[2]+'</i><p>'+x[3]+'</p></div>';}).join('')+'</div>'
-      +'<div class="chips">'+d.chips.map(function(c){return '<span>'+c+'</span>';}).join('')+'</div></div>'
+      +'<div class="sec"><div class="kick">'+d.k2+'</div><h2>'+d.h2b+'</h2><div class="vals">'
+      +d.vals.map(function(x,i){return '<div class="val"><div class="n">0'+(i+1)+'</div><div><b>'+x[0]+'</b><p>'+x[1]+'</p></div></div>';}).join('')+'</div></div>'
       +'<div class="cta"><div class="l"><b>'+d.ctaB+'</b><span>'+d.ctaS+'</span></div><div class="go">'+d.go+'</div></div>'
       +'<div class="dis">'+d.dis+'</div>'
       +'</div>';
