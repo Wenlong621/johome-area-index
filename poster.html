@@ -47,7 +47,11 @@ h2{font-size:22px;font-weight:800;margin-top:8px;line-height:1.3}
 .cta .go{background:var(--acc);color:#16233C;font-weight:700;font-size:12.5px;border-radius:99px;padding:9px 16px;white-space:nowrap}
 .poster.light .cta .go{color:#fff}
 .dis{font-size:9px;color:var(--mute);opacity:.85;margin-top:12px;line-height:1.6}
-html[lang=en] h1{font-size:48px}
+html[lang=en] h1{font-size:42px;line-height:1.12}
+html[lang=en] .art{height:176px}
+html[lang=en] .sec{margin-top:16px}
+html[lang=en] h2{font-size:20px}
+html[lang=en] .val{padding:11px 0}
 html[lang=en] .lead{font-size:14px;line-height:1.6}
 html[lang=en] .pt p{font-size:10.3px;line-height:1.5}
 html[lang=en] .lv p{font-size:10px}
@@ -73,44 +77,44 @@ html[lang=en] .lv i{font-size:12px}
   var mCnt=mz.nbs.length,mCities=mz.cities.join(' / ');
   var C={
     zh:{
-      nw:'新功能上线',eyebrow:'JOHOME · 区域找房',
+      nw:'新功能上线',eyebrow:'JOHOME · 区域找房 · 大温 & 大多伦多',
       h1:['不知道住哪？','先看懂<em>那一片</em>'],
-      lead:'新上线的<b>区域找房</b>：不用先知道任何地名，也能从整个大温出发，把范围一步步缩到适合自己的那一片。',
+      lead:'新上线的<b>区域找房</b>：不管在大温还是大多伦多，不用先知道任何地名，也能从整座都会区出发，把范围一步步缩到适合自己的那一片。',
       artA:'一个生活圈',artB:'市界穿过也不切开',
       k1:'新概念',h2a:'生活圈：本地人真正在用的地图',
       pts:[
-        ['💬','按本地人的说法找','「我住铁道镇那边」——这才是大家真实的表达。生活圈就是这些「那边」，不是冷冰冰的行政区。'],
-        ['🔗','跨市也算一片','Metrotown 生活圈覆盖 '+mCities+' 的 '+mCnt+' 个社区。生活范围在哪，圈就画到哪。'],
+        ['💬','按本地人的说法找','「我住铁道镇那边」「我在北约克」——这才是大家真实的表达。生活圈就是这些「那边」，不是冷冰冰的行政区。'],
+        ['🔗','跨市也算一片','大温的 Metrotown 生活圈横跨 '+mCities+'，覆盖 '+mCnt+' 个社区；大多的万锦于人村同理。生活范围在哪，圈就画到哪。'],
         ['📊','比城市细，比社区稳','一个市的均价掩盖了内部差异；单个社区成交又太少。生活圈的价格与涨幅，看得懂、也靠得住。']
       ],
       k2:'对你意味着什么',h2b:'少走弯路，选对那一片',
       vals:[
-        ['零基础也能开始','刚来大温、对城市一无所知？从大范围看起，一步步收窄，不用先背地名，也不会漏掉本地人才知道的好地方。'],
+        ['零基础也能开始','刚落地温哥华或多伦多、对城市一无所知？从大范围看起，一步步收窄，不用先背地名，也不会漏掉本地人才知道的好地方。'],
         ['比价不再被均价带偏','同一个市里，湖边独立屋和天车口高层完全是两个价。按生活圈看价格和涨幅，对应的是真实的生活范围，而不是一个笼统的行政均值。'],
         ['先选区，再选房','先锁定适合自己的那一片，再进去看房源。方向对了，就不用一套套无效看房，把时间花在真正值得比较的选项上。']
       ],
-      ctaB:'立即体验 · 区域找房',ctaS:'johome.com · 城市 / 生活圈 / 社区',go:'去看看 →',
-      dis:'数据覆盖 GVR + FVREB 官方 MLS 社区对照，'+nbTot+' 个社区唯一归属、无重叠无遗漏 · 页面数据为示意，历史涨幅不代表未来表现，以官方最新数据为准'
+      ctaB:'立即体验 · 区域找房',ctaS:'johome.com · 大温哥华 · 大多伦多',go:'去看看 →',
+      dis:'大温按 GVR + FVREB 官方 MLS 社区对照划分（'+nbTot+' 个社区唯一归属、无重叠无遗漏），大多按 TRREB 社区同口径划分 · 页面数据为示意，历史涨幅不代表未来表现，以官方最新数据为准'
     },
     en:{
-      nw:'NEW',eyebrow:'JOHOME · AREA FINDER',
+      nw:'NEW',eyebrow:'AREA FINDER · VANCOUVER & TORONTO',
       h1:['Not sure where to live?','Start with <em>the area</em>'],
-      lead:'The new <b>Area Finder</b>: start from all of Metro Vancouver and narrow down, step by step, to the area that fits you — no place names required.',
+      lead:'The new <b>Area Finder</b>: in Metro Vancouver or the GTA, start from the whole region and narrow down to the area that fits you — no place names required.',
       artA:'one lifestyle zone',artB:'city lines don’t cut it',
       k1:'THE IDEA',h2a:'Lifestyle zones: the map locals actually use',
       pts:[
-        ['💬','Search the way locals talk','“I live around Metrotown.” That is how people really describe home. A lifestyle zone is that “around” — not an administrative box.'],
-        ['🔗','One zone, across cities','The Metrotown zone spans '+mCnt+' neighbourhoods in '+mCities+'. Where life extends, the zone follows.'],
-        ['📊','Finer than a city, steadier than a block','A city average hides its own contrasts; one neighbourhood has too few sales. Zone prices and growth are readable and reliable.']
+        ['💬','Search the way locals talk','“I live around Metrotown.” “I’m in North York.” That’s how people describe home — a zone is that “around”, not an administrative box.'],
+        ['🔗','One zone, across cities','Vancouver’s Metrotown zone spans '+mCnt+' neighbourhoods across '+mCities+'; Toronto’s Markham–Unionville works the same way.'],
+        ['📊','Finer than a city, steadier than a block','A city average hides its contrasts; one neighbourhood has too few sales. Zone prices and growth are readable and reliable.']
       ],
       k2:'WHAT IT MEANS FOR YOU',h2b:'Fewer detours, the right area',
       vals:[
-        ['Start with zero local knowledge','New to Metro Vancouver? Begin broad and narrow step by step — no place names to memorise, and no missing the spots only locals know.'],
-        ['Prices that mean something','Within one city a lakeside house and a tower by the SkyTrain are worlds apart. Zone-level prices and growth track a real living area, not an administrative average.'],
-        ['Pick the area before the home','Lock in the right area first, then look at listings. With the direction set, you skip the wasted viewings and compare only what matters.']
+        ['Start with zero local knowledge','Just landed in Vancouver or Toronto? Begin broad and narrow step by step — no place names to memorise.'],
+        ['Prices that mean something','A lakeside house and a transit-side tower in the same city are worlds apart. Zone-level prices track a real living area, not an administrative average.'],
+        ['Pick the area before the home','Lock in the right area first, then look at listings — fewer wasted viewings, sharper comparisons.']
       ],
-      ctaB:'Try the Area Finder',ctaS:'johome.com · City / Zone / Neighbourhood',go:'Open →',
-      dis:'Built on the official GVR + FVREB MLS sub-area mapping — '+nbTot+' neighbourhoods, one zone each, no overlap or gap · Illustrative data; past growth does not indicate future results'
+      ctaB:'Try the Area Finder',ctaS:'johome.com · Metro Vancouver · Greater Toronto',go:'Open →',
+      dis:'Metro Vancouver zones follow the official GVR + FVREB MLS sub-area mapping ('+nbTot+' neighbourhoods, one zone each, no overlap or gap); GTA zones use TRREB communities on the same basis · Illustrative data; past growth does not indicate future results'
     }
   };
   var lang='zh',variant='dark';
