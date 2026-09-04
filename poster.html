@@ -12,36 +12,51 @@ body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans G
 .btn:hover{border-color:#1E63DE;color:#1E63DE}
 .btn.on{background:#16233C;border-color:#16233C;color:#fff}
 .stage{transform-origin:top center}
-.poster{width:540px;height:960px;position:relative;overflow:hidden;background:#0A1A33;color:#fff;box-shadow:0 20px 60px rgba(10,26,51,.35)}
-.poster .pad{position:absolute;left:52px;right:52px;top:52px;bottom:44px;display:flex;flex-direction:column}
-.brand{display:flex;align-items:center;justify-content:space-between;font-size:13px;letter-spacing:3px;opacity:.85}
-.brand .nw{border:1px solid currentColor;border-radius:99px;padding:3px 12px;font-size:11px;letter-spacing:2px}
-.eyebrow{margin-top:76px;font-size:13px;letter-spacing:6px;opacity:.6}
-h1{margin-top:16px;font-size:74px;line-height:1.06;font-weight:800;letter-spacing:2px}
-h1 em{font-style:normal;color:#FFD24A}
-.rule{width:56px;height:4px;background:#FFD24A;margin:26px 0 20px}
-.sub{font-size:17px;line-height:1.75;opacity:.86;font-weight:300;max-width:330px}
-.sub b{font-weight:600;opacity:1}
-html[lang=en] .sub{max-width:392px;font-size:16px;line-height:1.7}
-.art{flex:1;position:relative;margin:0 -12px;min-height:0;overflow:hidden}
+.poster{--acc:#FFD24A;--fg:#fff;--mute:rgba(255,255,255,.62);--line:rgba(255,255,255,.18);--card:rgba(255,255,255,.07);--cardb:rgba(255,255,255,.14);
+  width:540px;height:1200px;position:relative;overflow:hidden;background:#0A1A33;color:var(--fg);box-shadow:0 20px 60px rgba(10,26,51,.35)}
+.poster.light{--acc:#1E63DE;--fg:#16233C;--mute:rgba(22,35,60,.6);--line:rgba(22,35,60,.16);--card:#fff;--cardb:#E3E0D6;background:#F4F1EA}
+.poster.bold{--acc:#FFE58A;background:linear-gradient(165deg,#1B49C6 0%,#2E7BE8 50%,#6B4DF0 100%)}
+.pad{position:absolute;left:46px;right:46px;top:44px;bottom:38px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;letter-spacing:3px;opacity:.85}
+.brand .nw{border:1px solid currentColor;border-radius:99px;padding:3px 12px;font-size:10.5px;letter-spacing:2px}
+.eyebrow{margin-top:40px;font-size:12px;letter-spacing:5px;color:var(--mute)}
+h1{margin-top:12px;font-size:56px;line-height:1.1;font-weight:800;letter-spacing:1px}
+h1 em{font-style:normal;color:var(--acc)}
+.lead{margin-top:16px;font-size:15px;line-height:1.7;color:var(--mute);max-width:420px}
+.lead b{color:var(--fg);font-weight:600}
+.art{height:230px;position:relative;margin:6px -10px 0;overflow:hidden}
 .art>svg{position:absolute;top:0;left:0;width:100%;height:100%}
-.nums{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.22);padding-top:20px}
-.nums div{flex:1}
-.nums b{display:block;font-size:38px;font-weight:800;line-height:1;letter-spacing:-1px}
-.nums span{font-size:12px;opacity:.62;letter-spacing:1px;display:block;margin-top:7px}
-.foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:22px}
-.foot .site{font-size:13px;letter-spacing:1px;opacity:.9}
-.foot .dis{font-size:9.5px;opacity:.42;text-align:right;line-height:1.6;max-width:200px}
-/* light variant */
-.poster.light{background:#F4F1EA;color:#16233C}
-.poster.light h1 em{color:#1E63DE}
-.poster.light .rule{background:#1E63DE}
-.poster.light .nums{border-color:rgba(22,35,60,.18)}
-.poster.light .brand,.poster.light .eyebrow,.poster.light .sub,.poster.light .nums span,.poster.light .foot .dis{opacity:.72}
-/* bold variant */
-.poster.bold{background:linear-gradient(160deg,#1B49C6 0%,#2E7BE8 48%,#6B4DF0 100%)}
-.poster.bold h1 em{color:#FFE58A}
-.poster.bold .rule{background:#FFE58A}
+.sec{margin-top:22px}
+.kick{display:flex;align-items:center;gap:10px;font-size:11px;letter-spacing:3px;color:var(--acc)}
+.kick:after{content:'';flex:1;height:1px;background:var(--line)}
+h2{font-size:22px;font-weight:800;margin-top:8px;line-height:1.3}
+.pts{display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-top:12px}
+.pt{background:var(--card);border:1px solid var(--cardb);border-radius:12px;padding:12px 11px 11px}
+.pt .ic{font-size:18px;line-height:1;margin-bottom:8px}
+.pt b{display:block;font-size:13px;line-height:1.35;margin-bottom:4px}
+.pt p{font-size:11px;line-height:1.55;color:var(--mute)}
+.lvls{display:flex;gap:8px;margin-top:12px}
+.lv{flex:1;border:1px solid var(--cardb);background:var(--card);border-radius:12px;padding:11px 12px;position:relative}
+.lv.on{border-color:var(--acc);box-shadow:0 0 0 2px rgba(255,210,74,.14)}
+.poster.light .lv.on{box-shadow:0 0 0 2px rgba(30,99,222,.14)}
+.lv b{display:block;font-size:26px;font-weight:800;line-height:1;letter-spacing:-.5px}
+.lv b small{font-size:11px;font-weight:600;margin-left:3px;letter-spacing:0;color:var(--mute)}
+.lv i{display:block;font-style:normal;font-size:13px;font-weight:600;margin-top:6px}
+.lv p{font-size:10.5px;line-height:1.5;color:var(--mute);margin-top:3px}
+.lv .step{position:absolute;top:9px;right:11px;font-size:10px;color:var(--mute);letter-spacing:1px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.chips span{border:1px solid var(--cardb);background:var(--card);border-radius:99px;padding:5px 11px;font-size:11px;color:var(--fg)}
+.cta{margin-top:auto;display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--line);padding-top:16px}
+.cta .l b{display:block;font-size:15px;font-weight:700}
+.cta .l span{font-size:11.5px;color:var(--mute);display:block;margin-top:3px}
+.cta .go{background:var(--acc);color:#16233C;font-weight:700;font-size:12.5px;border-radius:99px;padding:9px 16px;white-space:nowrap}
+.poster.light .cta .go{color:#fff}
+.dis{font-size:9px;color:var(--mute);opacity:.85;margin-top:12px;line-height:1.6}
+html[lang=en] h1{font-size:48px}
+html[lang=en] .lead{font-size:14px;line-height:1.6}
+html[lang=en] .pt p{font-size:10.3px;line-height:1.5}
+html[lang=en] .lv p{font-size:10px}
+html[lang=en] .lv i{font-size:12px}
 </style>
 </head>
 <body>
@@ -50,7 +65,7 @@ html[lang=en] .sub{max-width:392px;font-size:16px;line-height:1.7}
   <button class="btn" data-v="light">米白</button>
   <button class="btn" data-v="bold">渐变</button>
   <button class="btn" id="bLang">EN</button>
-  <button class="btn" id="bDl">⬇ 下载 1080×1920</button>
+  <button class="btn" id="bDl">⬇ 下载 1080×2400</button>
 </div>
 <div class="stage" id="stage"><div class="poster" id="poster"></div></div>
 <script src="data.js?v=20260828e"></script>
@@ -59,36 +74,64 @@ html[lang=en] .sub{max-width:392px;font-size:16px;line-height:1.7}
 (function(){
   var cTot=Object.keys(JH.CITYCARD).length,zTot=0,nbTot=0,k;
   for(k in JH.ZONES){zTot++;nbTot+=JH.ZONES[k].nbs.length;}
+  var mz=JH.ZONES['Metrotown']||{nbs:[],cities:[]};
+  var mCnt=mz.nbs.length,mCities=mz.cities.join(' / ');
   var C={
-    zh:{nw:'新功能',eyebrow:'JOHOME 区域找房',h1:['找房','先看懂','<em>那一片</em>'],
-        sub:'<b>生活圈</b>：本地人口中的「那一片」——<br/>几个相邻社区连成一圈，跨市也算。<br/>现在，可以直接按圈找房。',
-        nums:[[cTot,'城市'],[zTot,'生活圈'],[nbTot,'MLS 社区']],
-        site:'johome.com · 区域找房',
-        dis:'数据示意，历史涨幅不代表未来；以官方最新数据为准',
-        artA:'一个生活圈',artB:'跨市也算'},
-    en:{nw:'NEW',eyebrow:'JOHOME AREA FINDER',h1:['Start','with the','<em>area</em>'],
-        sub:'<b>Lifestyle zones</b>: the areas locals actually name — neighbouring communities in one circle, city lines crossed where life does.',
-        nums:[[cTot,'CITIES'],[zTot,'ZONES'],[nbTot,'NEIGHBOURHOODS']],
-        site:'johome.com · Area Finder',
-        dis:'Illustrative data; past growth does not indicate future results',
-        artA:'one lifestyle zone',artB:'crosses city lines'}
+    zh:{
+      nw:'新功能上线',eyebrow:'JOHOME · 区域找房',
+      h1:['不知道住哪？','先看懂<em>那一片</em>'],
+      lead:'新上线的<b>区域找房</b>，把大温拆成 城市 → 生活圈 → 社区 三层。就算对这座城市一无所知，也能从大到小，一层层找到适合自己的那一片。',
+      artA:'一个生活圈',artB:'市界穿过也不切开',
+      k1:'新概念',h2a:'生活圈：本地人真正在用的地图',
+      pts:[
+        ['💬','按本地人的说法找','「我住铁道镇那边」——这才是大家真实的表达。生活圈就是这些「那边」，不是冷冰冰的行政区。'],
+        ['🔗','跨市也算一片','Metrotown 生活圈覆盖 '+mCities+' 的 '+mCnt+' 个社区。生活范围在哪，圈就画到哪。'],
+        ['📊','比城市细，比社区稳','一个市的均价掩盖了内部差异；单个社区成交又太少。生活圈的价格与涨幅，看得懂、也靠得住。']
+      ],
+      k2:'怎么用',h2b:'三层索引，一层层收窄',
+      lv:[[cTot,'座','城市','先定落脚哪个市：中位价、涨幅、城市定位一眼对比','01'],
+          [zTot,'个','生活圈','再挑本地人认的那一片：跨市、可比、有行情','02'],
+          [nbTot,'个','MLS 社区','最后下钻到社区与房源，一步进详情','03']],
+      chips:['中英文搜索','按城市 / 生活圈筛选','价格 · 涨幅 · 在售排序','热门与历史快捷入口','一键进 AI 帮我选'],
+      ctaB:'立即体验 · 区域找房',ctaS:'johome.com · 城市 / 生活圈 / 社区',go:'去看看 →',
+      dis:'数据覆盖 GVR + FVREB 官方 MLS 社区对照，'+nbTot+' 个社区唯一归属、无重叠无遗漏 · 页面数据为示意，历史涨幅不代表未来表现，以官方最新数据为准'
+    },
+    en:{
+      nw:'NEW',eyebrow:'JOHOME · AREA FINDER',
+      h1:['Not sure where to live?','Start with <em>the area</em>'],
+      lead:'The new <b>Area Finder</b> breaks Metro Vancouver into three levels — City → Lifestyle zone → Neighbourhood — so you can narrow down from big to small, even if the city is new to you.',
+      artA:'one lifestyle zone',artB:'city lines don’t cut it',
+      k1:'THE IDEA',h2a:'Lifestyle zones: the map locals actually use',
+      pts:[
+        ['💬','Search the way locals talk','“I live around Metrotown.” That is how people really describe home. A lifestyle zone is that “around” — not an administrative box.'],
+        ['🔗','One zone, across cities','The Metrotown zone spans '+mCnt+' neighbourhoods in '+mCities+'. Where life extends, the zone follows.'],
+        ['📊','Finer than a city, steadier than a block','A city average hides its own contrasts; one neighbourhood has too few sales. Zone prices and growth are readable and reliable.']
+      ],
+      k2:'HOW IT WORKS',h2b:'Three levels, narrowing step by step',
+      lv:[[cTot,'','Cities','Pick the municipality: median price, growth and positioning at a glance','01'],
+          [zTot,'','Lifestyle zones','Choose the area locals recognise — comparable, with market data','02'],
+          [nbTot,'','Neighbourhoods','Drill down to the block and its listings in one tap','03']],
+      chips:['Bilingual search','Filter by city / zone','Sort by price · growth · listings','Popular & recent shortcuts','Ask AI in one tap'],
+      ctaB:'Try the Area Finder',ctaS:'johome.com · City / Zone / Neighbourhood',go:'Open →',
+      dis:'Built on the official GVR + FVREB MLS sub-area mapping — '+nbTot+' neighbourhoods, one zone each, no overlap or gap · Illustrative data; past growth does not indicate future results'
+    }
   };
   var lang='zh',variant='dark';
   var ACC={dark:'#FFD24A',light:'#1E63DE',bold:'#FFE58A'};
   function art(d,ac){
-    var dots='',seed=7,i,pts=[[250,150],[318,120],[196,206],[300,218],[372,182],[236,272],[318,286],[150,258],[386,262],[268,346],[196,330],[352,344],[112,196],[420,214]];
+    var dots='',i,pts=[[250,118],[318,92],[196,168],[300,180],[372,146],[236,230],[318,242],[150,214],[386,222],[268,296],[196,284],[352,296],[112,160],[420,176],[470,110],[70,250]];
     for(i=0;i<pts.length;i++){
-      var inZone=Math.sqrt(Math.pow(pts[i][0]-268,2)+Math.pow(pts[i][1]-246,2))<132;
-      dots+='<circle cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" r="'+(inZone?5.5:4)+'" fill="'+(inZone?ac:'currentColor')+'" opacity="'+(inZone?'1':'.28')+'"/>';
+      var inZone=Math.sqrt(Math.pow(pts[i][0]-268,2)+Math.pow(pts[i][1]-206,2))<112;
+      dots+='<circle cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" r="'+(inZone?5:3.6)+'" fill="'+(inZone?ac:'currentColor')+'" opacity="'+(inZone?'1':'.28')+'"/>';
     }
-    return '<svg viewBox="0 0 536 420" width="100%" height="100%" style="color:currentColor">'
-      +'<path d="M60 96 C 150 60, 210 190, 300 150 S 470 120, 500 40" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5" stroke-dasharray="7 7"/>'
-      +'<path d="M40 300 C 140 268, 190 372, 300 336 S 460 352, 512 300" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5" stroke-dasharray="7 7"/>'
-      +'<circle cx="268" cy="246" r="132" fill="'+ac+'" fill-opacity=".10" stroke="'+ac+'" stroke-width="2"/>'
-      +'<circle cx="268" cy="246" r="176" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="1"/>'
+    return '<svg viewBox="0 0 536 340" preserveAspectRatio="xMidYMid meet" style="color:currentColor">'
+      +'<path d="M40 70 C 140 40, 200 170, 290 130 S 460 100, 500 30" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5" stroke-dasharray="7 7"/>'
+      +'<path d="M30 262 C 130 232, 190 322, 300 290 S 460 306, 512 262" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5" stroke-dasharray="7 7"/>'
+      +'<circle cx="268" cy="206" r="112" fill="'+ac+'" fill-opacity=".10" stroke="'+ac+'" stroke-width="2"/>'
+      +'<circle cx="268" cy="206" r="150" fill="none" stroke="currentColor" stroke-opacity=".14" stroke-width="1"/>'
       +dots
-      +'<text x="268" y="252" text-anchor="middle" font-size="15" letter-spacing="2" fill="'+ac+'" font-family="inherit">'+d.artA+'</text>'
-      +'<text x="512" y="318" text-anchor="end" font-size="11.5" letter-spacing="1" fill="currentColor" opacity=".5" font-family="inherit">'+d.artB+'</text>'
+      +'<text x="268" y="211" text-anchor="middle" font-size="14" letter-spacing="2" fill="'+ac+'" font-family="inherit">'+d.artA+'</text>'
+      +'<text x="512" y="282" text-anchor="end" font-size="11" letter-spacing="1" fill="currentColor" opacity=".55" font-family="inherit">'+d.artB+'</text>'
       +'</svg>';
   }
   function render(){
@@ -98,11 +141,15 @@ html[lang=en] .sub{max-width:392px;font-size:16px;line-height:1.7}
       +'<div class="brand"><span>JOHOME</span><span class="nw">'+d.nw+'</span></div>'
       +'<div class="eyebrow">'+d.eyebrow+'</div>'
       +'<h1>'+d.h1.join('<br/>')+'</h1>'
-      +'<div class="rule"></div>'
-      +'<div class="sub">'+d.sub+'</div>'
+      +'<p class="lead">'+d.lead+'</p>'
       +'<div class="art">'+art(d,ACC[variant])+'</div>'
-      +'<div class="nums">'+d.nums.map(function(n){return '<div><b>'+n[0]+'</b><span>'+n[1]+'</span></div>';}).join('')+'</div>'
-      +'<div class="foot"><div class="site">'+d.site+'</div><div class="dis">'+d.dis+'</div></div>'
+      +'<div class="sec"><div class="kick">'+d.k1+'</div><h2>'+d.h2a+'</h2><div class="pts">'
+      +d.pts.map(function(x){return '<div class="pt"><div class="ic">'+x[0]+'</div><b>'+x[1]+'</b><p>'+x[2]+'</p></div>';}).join('')+'</div></div>'
+      +'<div class="sec"><div class="kick">'+d.k2+'</div><h2>'+d.h2b+'</h2><div class="lvls">'
+      +d.lv.map(function(x,i){return '<div class="lv'+(i===1?' on':'')+'"><span class="step">'+x[4]+'</span><b>'+x[0]+'<small>'+x[1]+'</small></b><i>'+x[2]+'</i><p>'+x[3]+'</p></div>';}).join('')+'</div>'
+      +'<div class="chips">'+d.chips.map(function(c){return '<span>'+c+'</span>';}).join('')+'</div></div>'
+      +'<div class="cta"><div class="l"><b>'+d.ctaB+'</b><span>'+d.ctaS+'</span></div><div class="go">'+d.go+'</div></div>'
+      +'<div class="dis">'+d.dis+'</div>'
       +'</div>';
     document.documentElement.lang=lang;
     document.getElementById('bLang').textContent=lang==='zh'?'EN':'中文';
@@ -111,15 +158,10 @@ html[lang=en] .sub{max-width:392px;font-size:16px;line-height:1.7}
   function fit(){
     var s=Math.min(1,(Math.min(window.innerWidth,900)-28)/540);
     var st=document.getElementById('stage');
-    st.style.transform='scale('+s+')';
-    st.style.height=(960*s)+'px';
+    st.style.transform='scale('+s+')';st.style.height=(1200*s)+'px';
   }
   Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(b){
-    b.onclick=function(){
-      variant=b.getAttribute('data-v');
-      Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(x){x.className='btn'+(x===b?' on':'');});
-      render();
-    };
+    b.onclick=function(){variant=b.getAttribute('data-v');Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(x){x.className='btn'+(x===b?' on':'');});render();};
   });
   document.getElementById('bLang').onclick=function(){lang=(lang==='zh'?'en':'zh');render();};
   document.getElementById('bDl').onclick=function(){
