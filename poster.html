@@ -3,162 +3,136 @@
 <head>
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>新功能上线 · Johome 区域找房</title>
+<title>生活圈 · Johome 新功能海报</title>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;background:#E9EDF3;color:#1B2330;display:flex;flex-direction:column;align-items:center;padding:18px 12px 40px}
-.bar{width:100%;max-width:440px;display:flex;gap:8px;margin-bottom:12px}
-.btn{flex:1;border:1px solid #C9D5E6;background:#fff;color:#33415C;border-radius:10px;padding:9px 0;font-size:12.5px;cursor:pointer;text-align:center}
+body{font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Hiragino Sans GB','Microsoft YaHei',sans-serif;background:#DFE4EC;display:flex;flex-direction:column;align-items:center;padding:16px 12px 40px}
+.bar{display:flex;gap:7px;margin-bottom:14px;flex-wrap:wrap;justify-content:center}
+.btn{border:1px solid #C2CDDD;background:#fff;color:#3B4A63;border-radius:99px;padding:7px 15px;font-size:12px;cursor:pointer}
 .btn:hover{border-color:#1E63DE;color:#1E63DE}
-.btn.on{background:#1E63DE;border-color:#1E63DE;color:#fff}
-#poster{width:100%;max-width:440px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 14px 40px rgba(20,40,80,.18)}
-.hero{background:linear-gradient(150deg,#1751C4 0%,#2C7BE5 55%,#4E9BF5 100%);color:#fff;padding:22px 22px 26px;position:relative}
-.hero .logo{font-weight:800;letter-spacing:2px;font-size:15px;opacity:.95}
-.hero .tagNew{display:inline-block;background:#FFCE4A;color:#5A3E00;font-size:11px;font-weight:700;border-radius:99px;padding:3px 11px;margin:14px 0 10px}
-.hero h1{font-size:27px;line-height:1.28;font-weight:800;letter-spacing:.5px}
-.hero h1 em{font-style:normal;color:#FFE07A}
-.hero p{font-size:13px;line-height:1.6;opacity:.92;margin-top:9px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:18px}
-.stats div{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.28);border-radius:12px;padding:9px 6px;text-align:center}
-.stats b{display:block;font-size:21px;font-weight:800;line-height:1.1}
-.stats span{font-size:11px;opacity:.9}
-.sec{padding:20px 22px 0}
-.kicker{font-size:11px;font-weight:700;color:#1E63DE;letter-spacing:1.5px;margin-bottom:7px}
-h2{font-size:19px;font-weight:800;line-height:1.35;margin-bottom:8px}
-.lead{font-size:13px;line-height:1.75;color:#41506B}
-.lead b{color:#1751C4}
-.diagram{background:#F2F6FD;border:1px solid #DCE7F8;border-radius:14px;padding:14px 14px 12px;margin:14px 0 0}
-.lvl{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:10px;background:#fff;border:1px solid #E4EBF6;margin-bottom:7px}
-.lvl:last-child{margin-bottom:0}
-.lvl .ic{width:30px;height:30px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;flex:none}
-.lvl .tx{flex:1;min-width:0}
-.lvl .tx b{font-size:13.5px;display:block}
-.lvl .tx span{font-size:11px;color:#6B7A93}
-.lvl .num{font-size:15px;font-weight:800;color:#1E63DE}
-.lvl.mid{border-color:#1E63DE;box-shadow:0 0 0 2px rgba(30,99,222,.12)}
-.arrow{text-align:center;color:#9FB2CE;font-size:12px;line-height:1;margin:-3px 0 4px}
-.why{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:14px}
-.why div{background:#fff;border:1px solid #E4EBF6;border-radius:12px;padding:11px 12px}
-.why b{font-size:12px;color:#C0392B;display:block;margin-bottom:4px}
-.why.pos b{color:#0E9F6E}
-.why p{font-size:11.5px;line-height:1.55;color:#5A6B85}
-.case{background:#0F2F6B;color:#fff;border-radius:14px;padding:14px 15px;margin-top:15px}
-.case .t{font-size:11px;letter-spacing:1px;opacity:.75;margin-bottom:6px}
-.case .n{font-size:17px;font-weight:800}
-.case .n small{font-size:12px;font-weight:400;opacity:.8;margin-left:6px}
-.case .d{font-size:12px;line-height:1.65;opacity:.92;margin-top:6px}
-.case .row{display:flex;gap:8px;margin-top:10px}
-.case .row div{flex:1;background:rgba(255,255,255,.13);border-radius:9px;padding:7px 9px}
-.case .row b{display:block;font-size:14px;font-weight:700}
-.case .row span{font-size:10px;opacity:.8}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.two div{background:#F7F9FD;border:1px solid #E4EBF6;border-radius:13px;padding:12px 13px}
-.two b{font-size:13.5px;display:block;margin-bottom:4px}
-.two p{font-size:11.5px;line-height:1.6;color:#5A6B85}
-.cta{margin:20px 22px 0;background:linear-gradient(135deg,#1E63DE,#7A5AF8);border-radius:14px;padding:15px 16px;color:#fff;display:flex;align-items:center;gap:12px}
-.cta b{font-size:15px;display:block}
-.cta p{font-size:11.5px;opacity:.9;margin-top:3px}
-.cta .go{font-size:20px}
-.foot{padding:14px 22px 20px;font-size:10.5px;line-height:1.7;color:#8A97AC}
-.foot b{color:#5A6B85;font-weight:600}
+.btn.on{background:#16233C;border-color:#16233C;color:#fff}
+.stage{transform-origin:top center}
+.poster{width:540px;height:960px;position:relative;overflow:hidden;background:#0A1A33;color:#fff;box-shadow:0 20px 60px rgba(10,26,51,.35)}
+.poster .pad{position:absolute;left:52px;right:52px;top:52px;bottom:44px;display:flex;flex-direction:column}
+.brand{display:flex;align-items:center;justify-content:space-between;font-size:13px;letter-spacing:3px;opacity:.85}
+.brand .nw{border:1px solid currentColor;border-radius:99px;padding:3px 12px;font-size:11px;letter-spacing:2px}
+.eyebrow{margin-top:76px;font-size:13px;letter-spacing:6px;opacity:.6}
+h1{margin-top:16px;font-size:74px;line-height:1.06;font-weight:800;letter-spacing:2px}
+h1 em{font-style:normal;color:#FFD24A}
+.rule{width:56px;height:4px;background:#FFD24A;margin:26px 0 20px}
+.sub{font-size:17px;line-height:1.75;opacity:.86;font-weight:300;max-width:330px}
+.sub b{font-weight:600;opacity:1}
+html[lang=en] .sub{max-width:392px;font-size:16px;line-height:1.7}
+.art{flex:1;position:relative;margin:0 -12px;min-height:0;overflow:hidden}
+.art>svg{position:absolute;top:0;left:0;width:100%;height:100%}
+.nums{display:flex;gap:0;border-top:1px solid rgba(255,255,255,.22);padding-top:20px}
+.nums div{flex:1}
+.nums b{display:block;font-size:38px;font-weight:800;line-height:1;letter-spacing:-1px}
+.nums span{font-size:12px;opacity:.62;letter-spacing:1px;display:block;margin-top:7px}
+.foot{display:flex;align-items:flex-end;justify-content:space-between;margin-top:22px}
+.foot .site{font-size:13px;letter-spacing:1px;opacity:.9}
+.foot .dis{font-size:9.5px;opacity:.42;text-align:right;line-height:1.6;max-width:200px}
+/* light variant */
+.poster.light{background:#F4F1EA;color:#16233C}
+.poster.light h1 em{color:#1E63DE}
+.poster.light .rule{background:#1E63DE}
+.poster.light .nums{border-color:rgba(22,35,60,.18)}
+.poster.light .brand,.poster.light .eyebrow,.poster.light .sub,.poster.light .nums span,.poster.light .foot .dis{opacity:.72}
+/* bold variant */
+.poster.bold{background:linear-gradient(160deg,#1B49C6 0%,#2E7BE8 48%,#6B4DF0 100%)}
+.poster.bold h1 em{color:#FFE58A}
+.poster.bold .rule{background:#FFE58A}
 </style>
 </head>
 <body>
 <div class="bar">
-  <button class="btn on" id="bZh">中文</button>
-  <button class="btn" id="bEn">English</button>
-  <button class="btn" id="bDl">⬇ 下载图片</button>
+  <button class="btn on" data-v="dark">深蓝</button>
+  <button class="btn" data-v="light">米白</button>
+  <button class="btn" data-v="bold">渐变</button>
+  <button class="btn" id="bLang">EN</button>
+  <button class="btn" id="bDl">⬇ 下载 1080×1920</button>
 </div>
-<div id="poster"></div>
+<div class="stage" id="stage"><div class="poster" id="poster"></div></div>
 <script src="data.js?v=20260828e"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 <script>
 (function(){
-  var SITE='https://wenlong621.github.io/johome-area-index/';
   var cTot=Object.keys(JH.CITYCARD).length,zTot=0,nbTot=0,k;
   for(k in JH.ZONES){zTot++;nbTot+=JH.ZONES[k].nbs.length;}
-  var mz=JH.ZONES['Metrotown']||{},ms=JH.ZSTATS['Metrotown']||{};
-  var mCnt=(mz.nbs||[]).length,mCities=(mz.cities||[]).join(' + '),mMed=ms.med||0,mAct=ms.active||0;
-  var D={
-    zh:{
-      badge:'NEW · 新功能上线',
-      h1:'找房，先看懂<em>「区域」</em>',
-      sub:'城市 · 生活圈 · MLS 社区，三级区域索引全量上线。不用先知道要住哪，也能一层层找到自己的那一片。',
-      s:[[cTot,'城市'],[zTot,'生活圈'],[nbTot,'MLS 社区']],
-      kicker:'CORE · 核心新概念',
-      h2:'什么是「生活圈」？',
-      lead:'问本地人住哪儿，很少有人报 MLS 社区名，都是一句「我住<b>铁道镇</b>那边」。生活圈就是把这种<b>本地人认的那一片</b>做成了可比较的单元——地理相邻、配套与通勤相近的若干 MLS 社区聚成一个圈，边界按真实生活认知划，因此<b>可以跨行政市</b>。',
-      lv:[['🏙️','城市','行政市 · 范围最大',cTot,'#E9F1FE','#1E63DE'],
-          ['🗺️','生活圈','本地人认知的那一片 · 可跨市',zTot,'#FFF3D6','#B4741A'],
-          ['🏘️','MLS 社区','挂牌最细颗粒度',nbTot,'#E7F6EF','#0E9F6E']],
-      whyA:['只看城市，太粗','同一个市里，湖畔独立屋和天车口高层完全是两种生活，一个均价说明不了什么。'],
-      whyB:['只看社区，太细','单个 MLS 社区一年成交样本少，价格波动大，横向比较容易被噪音带偏。'],
-      caseT:'实例',
-      caseD:'以 Metrotown 商圈为锚，覆盖 '+mCities+' 的 '+mCnt+' 个 MLS 社区：从高层公寓到 Deer Lake 湖畔独立屋，都在这一圈里。',
-      caseM:[[mCnt+' 个','包含 MLS 社区'],['$'+mMed+'万','片区售出中位价'],[mAct+' 套','在售套数']],
-      twoA:['城市','按行政市浏览：售出中位价、近一年涨幅与城市定位，先定落脚哪个市。'],
-      twoB:['MLS 社区','挂牌最细颗粒度，按生活圈分组，可直接下钻到房源。'],
-      ctaB:'立即体验 · 区域找房',
-      ctaP:'搜索 / 筛选 / 排序 · 也可让 AI 帮你选',
-      foot:'<b>数据口径：</b>覆盖 GVR + FVREB 官方 MLS Subarea 对照，'+nbTot+' 个社区每个唯一归属、无重叠无遗漏；价格为区间中位数，随市场更新。<br/>页面数据为原型示意，历史涨幅不代表未来表现，具体以官方最新数据与专业意见为准。'
-    },
-    en:{
-      badge:'NEW · Just launched',
-      h1:'Start with the <em>area</em>, not the listing',
-      sub:'City · Lifestyle zone · MLS neighbourhood — a full three-level area index. You no longer need to know where you want to live before you start looking.',
-      s:[[cTot,'Cities'],[zTot,'Lifestyle zones'],[nbTot,'MLS neighbourhoods']],
-      kicker:'CORE · THE NEW IDEA',
-      h2:'What is a lifestyle zone?',
-      lead:'Ask a local where they live and you rarely get an MLS neighbourhood name — you get “<b>around Metrotown</b>”. A lifestyle zone turns that <b>area locals actually recognise</b> into a comparable unit: neighbouring MLS areas with similar amenities and commutes, grouped by how the area really reads — so a zone <b>can cross municipal lines</b>.',
-      lv:[['🏙️','City','Municipality · broadest',cTot,'#E9F1FE','#1E63DE'],
-          ['🗺️','Lifestyle zone','The area locals recognise · can cross cities',zTot,'#FFF3D6','#B4741A'],
-          ['🏘️','MLS neighbourhood','Finest listing level',nbTot,'#E7F6EF','#0E9F6E']],
-      whyA:['A city is too coarse','Within one city, a lakeside detached home and a tower by the SkyTrain are different lives — one average says little.'],
-      whyB:['A neighbourhood is too fine','A single MLS neighbourhood has few sales a year, so prices swing and comparisons pick up noise.'],
-      caseT:'EXAMPLE',
-      caseD:'Anchored on the Metrotown hub, it covers '+mCnt+' MLS neighbourhoods across '+mCities+' — from high-rise condos to detached homes by Deer Lake.',
-      caseM:[[mCnt,'MLS neighbourhoods'],['$'+(mMed/100).toFixed(2)+'M','Median sold'],[mAct,'Active listings']],
-      twoA:['City','Browse by municipality: median sold price, 12-month change and positioning — decide which city first.'],
-      twoB:['MLS neighbourhood','The finest listing level, grouped by lifestyle zone, drilling straight down to homes.'],
-      ctaB:'Try the area finder',
-      ctaP:'Search, filter, sort — or let AI choose with you',
-      foot:'<b>Data basis:</b> built on the official GVR + FVREB MLS sub-area mapping — each of the '+nbTot+' neighbourhoods belongs to exactly one zone, with no overlap or gap; prices are medians and update with the market.<br/>Prototype data shown for illustration. Past growth does not indicate future performance; refer to official data and professional advice.'
+  var C={
+    zh:{nw:'新功能',eyebrow:'JOHOME 区域找房',h1:['找房','先看懂','<em>那一片</em>'],
+        sub:'<b>生活圈</b>：本地人口中的「那一片」——<br/>几个相邻社区连成一圈，跨市也算。<br/>现在，可以直接按圈找房。',
+        nums:[[cTot,'城市'],[zTot,'生活圈'],[nbTot,'MLS 社区']],
+        site:'johome.com · 区域找房',
+        dis:'数据示意，历史涨幅不代表未来；以官方最新数据为准',
+        artA:'一个生活圈',artB:'跨市也算'},
+    en:{nw:'NEW',eyebrow:'JOHOME AREA FINDER',h1:['Start','with the','<em>area</em>'],
+        sub:'<b>Lifestyle zones</b>: the areas locals actually name — neighbouring communities in one circle, city lines crossed where life does.',
+        nums:[[cTot,'CITIES'],[zTot,'ZONES'],[nbTot,'NEIGHBOURHOODS']],
+        site:'johome.com · Area Finder',
+        dis:'Illustrative data; past growth does not indicate future results',
+        artA:'one lifestyle zone',artB:'crosses city lines'}
+  };
+  var lang='zh',variant='dark';
+  var ACC={dark:'#FFD24A',light:'#1E63DE',bold:'#FFE58A'};
+  function art(d,ac){
+    var dots='',seed=7,i,pts=[[250,150],[318,120],[196,206],[300,218],[372,182],[236,272],[318,286],[150,258],[386,262],[268,346],[196,330],[352,344],[112,196],[420,214]];
+    for(i=0;i<pts.length;i++){
+      var inZone=Math.sqrt(Math.pow(pts[i][0]-268,2)+Math.pow(pts[i][1]-246,2))<132;
+      dots+='<circle cx="'+pts[i][0]+'" cy="'+pts[i][1]+'" r="'+(inZone?5.5:4)+'" fill="'+(inZone?ac:'currentColor')+'" opacity="'+(inZone?'1':'.28')+'"/>';
     }
-  };
-  function render(L){
-    var d=D[L];
-    document.documentElement.lang=L;
-    document.getElementById('poster').innerHTML=
-      '<div class="hero"><div class="logo">JOHOME</div><span class="tagNew">'+d.badge+'</span>'
-      +'<h1>'+d.h1+'</h1><p>'+d.sub+'</p>'
-      +'<div class="stats">'+d.s.map(function(x){return '<div><b>'+x[0]+'</b><span>'+x[1]+'</span></div>';}).join('')+'</div></div>'
-      +'<div class="sec"><div class="kicker">'+d.kicker+'</div><h2>'+d.h2+'</h2><p class="lead">'+d.lead+'</p>'
-      +'<div class="diagram">'+d.lv.map(function(x,i){
-          return (i?'<div class="arrow">▾</div>':'')+'<div class="lvl'+(i===1?' mid':'')+'"><div class="ic" style="background:'+x[4]+';color:'+x[5]+'">'+x[0]+'</div>'
-          +'<div class="tx"><b>'+x[1]+'</b><span>'+x[2]+'</span></div><div class="num">'+x[3]+'</div></div>';
-        }).join('')+'</div>'
-      +'<div class="why"><div><b>✕ '+d.whyA[0]+'</b><p>'+d.whyA[1]+'</p></div><div><b>✕ '+d.whyB[0]+'</b><p>'+d.whyB[1]+'</p></div></div>'
-      +'<div class="case"><div class="t">'+d.caseT+'</div><div class="n">Metrotown'+(L==='zh'?'<small>铁道镇一带</small>':'<small>lifestyle zone</small>')+'</div>'
-      +'<div class="d">'+d.caseD+'</div><div class="row">'+d.caseM.map(function(m){return '<div><b>'+m[0]+'</b><span>'+m[1]+'</span></div>';}).join('')+'</div></div>'
-      +'<div class="two"><div><b>'+d.twoA[0]+'</b><p>'+d.twoA[1]+'</p></div><div><b>'+d.twoB[0]+'</b><p>'+d.twoB[1]+'</p></div></div></div>'
-      +'<div class="cta"><div style="flex:1"><b>'+d.ctaB+'</b><p>'+d.ctaP+'</p></div><span class="go">›</span></div>'
-      +'<div class="foot">'+d.foot+'</div>';
-    document.querySelector('.cta').onclick=function(){window.open(SITE+(L==='en'?'?lang=en':''),'_blank');};
-    document.getElementById('bZh').className='btn'+(L==='zh'?' on':'');
-    document.getElementById('bEn').className='btn'+(L==='en'?' on':'');
-    document.getElementById('bDl').textContent=L==='zh'?'⬇ 下载图片':'⬇ Download';
+    return '<svg viewBox="0 0 536 420" width="100%" height="100%" style="color:currentColor">'
+      +'<path d="M60 96 C 150 60, 210 190, 300 150 S 470 120, 500 40" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5" stroke-dasharray="7 7"/>'
+      +'<path d="M40 300 C 140 268, 190 372, 300 336 S 460 352, 512 300" fill="none" stroke="currentColor" stroke-opacity=".26" stroke-width="1.5" stroke-dasharray="7 7"/>'
+      +'<circle cx="268" cy="246" r="132" fill="'+ac+'" fill-opacity=".10" stroke="'+ac+'" stroke-width="2"/>'
+      +'<circle cx="268" cy="246" r="176" fill="none" stroke="currentColor" stroke-opacity=".16" stroke-width="1"/>'
+      +dots
+      +'<text x="268" y="252" text-anchor="middle" font-size="15" letter-spacing="2" fill="'+ac+'" font-family="inherit">'+d.artA+'</text>'
+      +'<text x="512" y="318" text-anchor="end" font-size="11.5" letter-spacing="1" fill="currentColor" opacity=".5" font-family="inherit">'+d.artB+'</text>'
+      +'</svg>';
   }
-  document.getElementById('bZh').onclick=function(){render('zh');};
-  document.getElementById('bEn').onclick=function(){render('en');};
+  function render(){
+    var d=C[lang],p=document.getElementById('poster');
+    p.className='poster'+(variant==='dark'?'':' '+variant);
+    p.innerHTML='<div class="pad">'
+      +'<div class="brand"><span>JOHOME</span><span class="nw">'+d.nw+'</span></div>'
+      +'<div class="eyebrow">'+d.eyebrow+'</div>'
+      +'<h1>'+d.h1.join('<br/>')+'</h1>'
+      +'<div class="rule"></div>'
+      +'<div class="sub">'+d.sub+'</div>'
+      +'<div class="art">'+art(d,ACC[variant])+'</div>'
+      +'<div class="nums">'+d.nums.map(function(n){return '<div><b>'+n[0]+'</b><span>'+n[1]+'</span></div>';}).join('')+'</div>'
+      +'<div class="foot"><div class="site">'+d.site+'</div><div class="dis">'+d.dis+'</div></div>'
+      +'</div>';
+    document.documentElement.lang=lang;
+    document.getElementById('bLang').textContent=lang==='zh'?'EN':'中文';
+    fit();
+  }
+  function fit(){
+    var s=Math.min(1,(Math.min(window.innerWidth,900)-28)/540);
+    var st=document.getElementById('stage');
+    st.style.transform='scale('+s+')';
+    st.style.height=(960*s)+'px';
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(b){
+    b.onclick=function(){
+      variant=b.getAttribute('data-v');
+      Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(x){x.className='btn'+(x===b?' on':'');});
+      render();
+    };
+  });
+  document.getElementById('bLang').onclick=function(){lang=(lang==='zh'?'en':'zh');render();};
   document.getElementById('bDl').onclick=function(){
-    var el=document.getElementById('poster'),btn=this,old=btn.textContent;
+    var btn=this,old=btn.textContent,st=document.getElementById('stage'),tr=st.style.transform;
     if(!window.html2canvas){btn.textContent='✕';setTimeout(function(){btn.textContent=old;},1500);return;}
-    btn.textContent='…';
-    html2canvas(el,{scale:2,backgroundColor:'#ffffff',useCORS:true}).then(function(cv){
-      var a=document.createElement('a');a.download='johome-area-finder-poster.png';a.href=cv.toDataURL('image/png');a.click();btn.textContent=old;
-    }).catch(function(){btn.textContent='✕';setTimeout(function(){btn.textContent=old;},1500);});
+    btn.textContent='…';st.style.transform='scale(1)';
+    html2canvas(document.getElementById('poster'),{scale:2,backgroundColor:null,useCORS:true}).then(function(cv){
+      var a=document.createElement('a');a.download='johome-lifestyle-zone-poster.png';a.href=cv.toDataURL('image/png');a.click();
+      st.style.transform=tr;btn.textContent=old;
+    }).catch(function(){st.style.transform=tr;btn.textContent='✕';setTimeout(function(){btn.textContent=old;},1500);});
   };
-  render('zh');
+  window.addEventListener('resize',fit);
+  render();
 })();
 </script>
 </body>
