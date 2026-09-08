@@ -69,6 +69,9 @@ html[lang=en] .lv i{font-size:12px}
 </head>
 <body>
 <div class="bar">
+  <button class="btn on" data-m="van">大温</button>
+  <button class="btn" data-m="to">大多</button>
+  <span style="width:6px"></span>
   <button class="btn on" data-v="dark">深蓝</button>
   <button class="btn" data-v="light">米白</button>
   <button class="btn" data-v="bold">渐变</button>
@@ -126,7 +129,37 @@ html[lang=en] .lv i{font-size:12px}
       dis:'Metro Vancouver zones follow the official GVR + FVREB MLS sub-area mapping ('+nbTot+' neighbourhoods, one zone each, no overlap or gap); GTA zones use TRREB communities on the same basis · Illustrative data; past growth does not indicate future results'
     }
   };
-  var lang='zh',variant='dark';
+  var M={
+    van:{
+      zh:{eyebrow:'JOHOME · 区域详情页 · 大温哥华',
+          pt0:['💬','按本地人的说法找','「我住铁道镇那边」「我在温西」——这才是大家真实的表达。生活圈就是这些「那边」，不是冷冰冰的行政区。'],
+          pt1:['🔗','跨区域也算一片','Metrotown 生活圈横跨 '+mCities+'，覆盖 '+mCnt+' 个 MLS 社区。生活范围在哪，圈就画到哪。'],
+          v0:['一页看懂一片区域','刚落地温哥华、对城市一无所知？不用再东拼西凑，一片区域的全貌在一页里看完，也不会漏掉本地人才知道的好地方。'],
+          v1:['比价不再被均价带偏','同一个市里，湖边独立屋和天车口高层完全是两个价。区域页上的价格与涨幅对应的是真实的生活范围，而不是一个笼统的行政均值。'],
+          ctaS:'johome.com · 大温哥华'},
+      en:{eyebrow:'AREA PAGES · METRO VANCOUVER',
+          pt0:['💬','Search the way locals talk','“I live around Metrotown.” “I’m on the West Side.” That’s how people describe home — a zone is that “around”, not an administrative box.'],
+          pt1:['🔗','One zone, across boundaries','The Metrotown zone spans '+mCnt+' MLS neighbourhoods across '+mCities+'. Where life extends, the zone follows.'],
+          v0:['One page, one whole area','Just landed in Vancouver? No more piecing things together — the full picture of an area on a single page, including the spots only locals know.'],
+          v1:['Prices that mean something','A lakeside house and a SkyTrain-side tower in the same city are worlds apart. Prices on an area page track a real living area, not an administrative average.'],
+          ctaS:'johome.com · Metro Vancouver'}
+    },
+    to:{
+      zh:{eyebrow:'JOHOME · 区域详情页 · 大多伦多',
+          pt0:['💬','按本地人的说法找','「我住北约克」「我在万锦于人村」——这才是大家真实的表达。生活圈就是这些「那边」，不是冷冰冰的行政区。'],
+          pt1:['🔗','跨区域也算一片','Yonge–Eglinton 生活圈横跨 Yonge 街两侧多个 MLS 社区，把整个 Midtown 连成一片。生活范围在哪，圈就画到哪。'],
+          v0:['一页看懂一片区域','刚落地多伦多、对城市一无所知？不用再东拼西凑，一片区域的全貌在一页里看完，也不会漏掉本地人才知道的好地方。'],
+          v1:['比价不再被均价带偏','同一个市里，湖滨公寓和 Bayview 一带的独立屋完全是两个价。区域页上的价格与涨幅对应的是真实的生活范围，而不是一个笼统的行政均值。'],
+          ctaS:'johome.com · 大多伦多'},
+      en:{eyebrow:'AREA PAGES · GREATER TORONTO',
+          pt0:['💬','Search the way locals talk','“I live in North York.” “I’m in Unionville.” That’s how people describe home — a zone is that “around”, not an administrative box.'],
+          pt1:['🔗','One zone, across boundaries','The Yonge–Eglinton zone stretches across several MLS neighbourhoods on both sides of Yonge, tying Midtown into one area. Where life extends, the zone follows.'],
+          v0:['One page, one whole area','Just landed in Toronto? No more piecing things together — the full picture of an area on a single page, including the spots only locals know.'],
+          v1:['Prices that mean something','A lakefront condo and a Bayview house in the same city are worlds apart. Prices on an area page track a real living area, not an administrative average.'],
+          ctaS:'johome.com · Greater Toronto'}
+    }
+  };
+  var lang='zh',variant='dark',market='van';
   var ACC={dark:'#FFD24A',light:'#1E63DE',bold:'#FFE58A'};
   function art(d,ac){
     var dots='',i,pts=[[250,118],[318,92],[196,168],[300,180],[372,146],[236,230],[318,242],[150,214],[386,222],[268,296],[196,284],[352,296],[112,160],[420,176],[470,110],[70,250]];
@@ -145,7 +178,9 @@ html[lang=en] .lv i{font-size:12px}
       +'</svg>';
   }
   function render(){
-    var d=C[lang],p=document.getElementById('poster');
+    var base=C[lang],o=M[market][lang],p=document.getElementById('poster');
+    var d={};for(var kk in base)d[kk]=base[kk];
+    d.eyebrow=o.eyebrow;d.ctaS=o.ctaS;d.pts=[o.pt0,o.pt1,base.pts[2]];d.vals=[o.v0,o.v1,base.vals[2]];
     p.className='poster'+(variant==='dark'?'':' '+variant);
     var deco=(variant==='light')?'':'<svg class="deco" viewBox="0 0 540 1080" preserveAspectRatio="none">'+'<g fill="none" stroke="#fff" stroke-opacity=".055" stroke-width="1.2">'+'<circle cx="600" cy="-40" r="250"/><circle cx="600" cy="-40" r="360"/><circle cx="600" cy="-40" r="470"/>'+'<circle cx="-80" cy="1060" r="220"/><circle cx="-80" cy="1060" r="330"/></g>'+'<g fill="#fff" fill-opacity=".08"><circle cx="470" cy="210" r="2.2"/><circle cx="502" cy="262" r="1.6"/><circle cx="430" cy="150" r="1.6"/><circle cx="60" cy="880" r="2"/><circle cx="110" cy="940" r="1.6"/></g>'+'<line x1="0" y1="600" x2="540" y2="520" stroke="#fff" stroke-opacity=".05" stroke-width="1"/></svg>';
     p.innerHTML=deco+'<div class="pad">'
@@ -171,13 +206,16 @@ html[lang=en] .lv i{font-size:12px}
   Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(b){
     b.onclick=function(){variant=b.getAttribute('data-v');Array.prototype.forEach.call(document.querySelectorAll('.btn[data-v]'),function(x){x.className='btn'+(x===b?' on':'');});render();};
   });
+  Array.prototype.forEach.call(document.querySelectorAll('.btn[data-m]'),function(b){
+    b.onclick=function(){market=b.getAttribute('data-m');Array.prototype.forEach.call(document.querySelectorAll('.btn[data-m]'),function(x){x.className='btn'+(x===b?' on':'');});render();};
+  });
   document.getElementById('bLang').onclick=function(){lang=(lang==='zh'?'en':'zh');render();};
   document.getElementById('bDl').onclick=function(){
     var btn=this,old=btn.textContent,st=document.getElementById('stage'),tr=st.style.transform;
     if(!window.html2canvas){btn.textContent='✕';setTimeout(function(){btn.textContent=old;},1500);return;}
     btn.textContent='…';st.style.transform='scale(1)';
     html2canvas(document.getElementById('poster'),{scale:2,backgroundColor:null,useCORS:true}).then(function(cv){
-      var a=document.createElement('a');a.download='johome-lifestyle-zone-poster.png';a.href=cv.toDataURL('image/png');a.click();
+      var a=document.createElement('a');a.download='johome-lifestyle-zone-'+market+'-'+lang+'.png';a.href=cv.toDataURL('image/png');a.click();
       st.style.transform=tr;btn.textContent=old;
     }).catch(function(){st.style.transform=tr;btn.textContent='✕';setTimeout(function(){btn.textContent=old;},1500);});
   };
